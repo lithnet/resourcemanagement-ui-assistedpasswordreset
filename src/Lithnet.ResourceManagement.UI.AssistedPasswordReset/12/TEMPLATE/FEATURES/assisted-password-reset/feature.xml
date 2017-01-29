@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Feature  Id="620926AA-A0FD-4BBA-8DAC-3E0CFCFEB41E"
+          Title="Lithnet Assisted Password Reset Module for FIM/MIM"
+          Description="Adds administrator-assisted password reset capability to FIM"
+          Version="1.0.0.0"
+          ActivateOnDefault="TRUE"
+          Hidden="FALSE"
+          Scope="Web"
+          xmlns="http://schemas.microsoft.com/sharepoint/">
+  <ElementManifests>
+    <ElementManifest Location="elements.xml"/>   
+  </ElementManifests>
+</Feature>

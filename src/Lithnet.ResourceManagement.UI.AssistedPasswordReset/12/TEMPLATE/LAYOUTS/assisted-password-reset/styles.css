@@ -1,0 +1,140 @@
+﻿.contentmain {
+    display: block;
+    position: fixed;
+    left: 50%;
+}
+
+    .contentmain .wrapper {
+        position: relative;
+        left: -50%;
+        background-color: #fff;
+        border: solid 2px #444;
+        border-radius: 10px;
+    }
+
+.formcontent {
+    margin: 10px;
+}
+
+html {
+    background-color: #aaa;
+}
+
+body {
+    font-family: "Segoe UI","Helvetica","Verdana", "Arial", "Sans-Serif";
+    font-size: 14px;
+}
+
+/*form {
+    margin: 10px;
+}*/
+
+h1 {
+    font-size: 22px;
+    text-align: center;
+    color: #333;
+}
+
+.warning {
+    text-align: left;
+    color: red;
+    margin: 10px;
+    padding: 7px 7px 7px 30px;
+    background-image: url('icon_alert.gif');
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+
+    #warning:empty {
+        display: none;
+    }
+
+table {
+    margin: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width: 400px;
+    border-top: 1px solid #e5eff8;
+    border-right: 1px solid #e5eff8;
+    border-collapse: collapse;
+    border-style: hidden;
+}
+
+th {
+    padding: 10px;
+    white-space: nowrap;
+    text-align: right;
+    font-weight: 600;
+    color: #678197;
+    border-bottom: 1px solid #e5eff8;
+    border-left: 1px solid #e5eff8;
+}
+
+td {
+    padding: 10px;
+    text-align: left;
+    width: 100%;
+    color: #678197;
+    border-bottom: 1px solid #e5eff8;
+}
+
+#result {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#header {
+    position: relative;
+    right: 0;
+    top: 0;
+    display: block;
+    margin: 0;
+    padding: 5px;
+    text-align: right;
+    float: right;
+}
+
+input.button {
+    color: #6e6e6e;
+    text-decoration: none;
+    padding: 7px 12px;
+    position: relative;
+    display: inline-block;
+    text-shadow: 0 1px 0 #fff;
+    -webkit-transition: border-color .218s;
+    -moz-transition: border .218s;
+    -o-transition: border-color .218s;
+    transition: border-color .218s;
+    background: #f3f3f3;
+    border: solid 1px #dcdcdc;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+    input.button:hover {
+        color: #333;
+        border-color: #999;
+        -moz-box-shadow: 0 1px 2px #777;
+        -webkit-box-shadow: 0 1px 2px #777;
+        box-shadow: 0 1px 2px #777;
+    }
+
+    input.button:active {
+        color: #000;
+        border-color: #444;
+    }
+
+#btSend {
+    margin: auto;
+    display: block;
+    position: relative;
+    right: 0;
+}
+
+.ModalBackground
+{
+    background-color:Gray;
+    filter:alpha(opacity=50);
+    opacity:0.5;
+}
