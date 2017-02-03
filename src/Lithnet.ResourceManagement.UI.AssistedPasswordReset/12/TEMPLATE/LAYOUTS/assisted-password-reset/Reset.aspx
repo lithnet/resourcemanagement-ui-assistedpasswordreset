@@ -20,47 +20,80 @@
                     <img src="lithnet16.png" alt="Lithnet" />
                 </div>
                 <h1>
-                    <asp:Label ID="lbHeader" runat="server" meta:resourcekey="lbHeader"></asp:Label></h1>
+                    <asp:Label ID="lbHeader" runat="server" />
+                </h1>
 
                 <div class="formcontent">
+                    <asp:Table runat="server" ID="attributeTable" />
 
-                    <asp:Table runat="server">
+                    <div>
+                        <asp:CheckBox ID="ckUserMustChangePassword" runat="server" Text="User must change password at next login" />
+                        <asp:RadioButtonList runat="server" ID="opSetMode" ClientIDMode="Static">
+                            <asp:ListItem Text="Automatically generate new password" Selected="True" Value="1" />
+                            <asp:ListItem Text="Specify a password" Value="2" />
+                        </asp:RadioButtonList>
+                    </div>
+
+                    <asp:Panel ID="panelSpecifyPassword" runat="server">
+                        <div>
+                            <table>
+                                <tr>
+                                    <td>New password:</td>
+                                    <td>
+
+                                        <asp:TextBox ID="txNewPassword1" runat="server" TextMode="Password" />
+                                        <asp:RequiredFieldValidator ID="validatortxNewPassword1" runat="server"
+                                            ControlToValidate="txNewPassword1"
+                                            CssClass="ValidationError"
+                                            ErrorMessage="&laquo; (Required)"
+                                            ToolTip="User Name is a REQUIRED field"></asp:RequiredFieldValidator>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Confirm new password:</td>
+                                    <td>
+                                        <asp:TextBox ID="txNewPassword2" runat="server" TextMode="Password" />
+                                        <asp:RequiredFieldValidator ID="validatortxNewPassword2" runat="server"
+                                            ControlToValidate="txNewPassword2"
+                                            CssClass="ValidationError"
+                                            ErrorMessage="&laquo; (Required)"
+                                            ToolTip="User Name is a REQUIRED field"></asp:RequiredFieldValidator>
+                                        <asp:CompareValidator ID="txNewPasswordCompareValidator" runat="server"
+                                            ControlToValidate="txNewPassword2"
+                                            CssClass="ValidationError"
+                                            ControlToCompare="txNewPassword1"
+                                            ErrorMessage="The passwords do not match"
+                                            ToolTip="Password must be the same" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </asp:Panel>
+
+                    <div id="divWarning" class="warning" runat="server">
+                        <asp:Label ID="lbWarning" runat="server" />
+                    </div>
+
+                    <asp:Table runat="server" ID="tableNewPassword">
                         <asp:TableRow>
                             <asp:TableHeaderCell>
-                                <asp:Label ID="lbCaptionUsername" runat="server" meta:resourcekey="lbCaptionUsername"></asp:Label>
+                                <asp:Label runat="server" ID="lbNewPasswordCaption" />
                             </asp:TableHeaderCell>
                             <asp:TableCell>
-                                <asp:Label ID="lbUser" runat="server" />
-                            </asp:TableCell>
-                        </asp:TableRow>
-                        <asp:TableRow>
-                            <asp:TableHeaderCell>
-                                <asp:Label ID="lbCaptionName" runat="server" meta:resourcekey="lbCaptionName"></asp:Label>
-                            </asp:TableHeaderCell>
-                            <asp:TableCell>
-                                <asp:Label ID="lbName" runat="server" />
-                            </asp:TableCell>
-                        </asp:TableRow>
-                        <asp:TableRow ID="rowSecurityCode" runat="server" Visible="false">
-                            <asp:TableHeaderCell>
-                                <asp:Label ID="lbCaptionSecurityCode" runat="server" meta:resourcekey="lbCaptionSecurityCode"></asp:Label>
-                            </asp:TableHeaderCell><asp:TableCell>
-                                <asp:Label ID="lbSecurityCode" runat="server" />
+                                <asp:Label ID="lbNewPassword" class="password" runat="server" />
                             </asp:TableCell>
                         </asp:TableRow>
                     </asp:Table>
 
-
-                    <div id="divWarning" class="warning" runat="server">
-                        <asp:Label ID="lbWarning" runat="server" Text="error" />
+                    <div id="divPasswordSetMessage" runat="server">
+                        <asp:Label ID="lbPasswordSetMessage" runat="server" />
                     </div>
 
-                    <asp:Button ID="btSend" runat="server" OnClick="btSend_Click" meta:resourcekey="btSend" CssClass="button" />
+                    <asp:Button ID="btReset" runat="server" OnClick="btReset_Click" CssClass="button" />
+
                 </div>
             </div>
         </div>
-
-
 
         <asp:ScriptManager ID="ScriptManager1" runat="server" />
         <ajaxToolkit:ModalPopupExtender runat="server" ID="ModalPopupExtender1"
@@ -71,34 +104,32 @@
             RepositionMode="RepositionOnWindowResizeAndScroll">
         </ajaxToolkit:ModalPopupExtender>
 
-        <asp:Panel ID="popup" runat="server" DefaultButton="btAuthN">
+        <asp:Panel ID="popup" runat="server" DefaultButton="btAuthN" Style="display: none">
             <div class="contentmain">
                 <div class="wrapper">
                     <h1>
-                        <asp:Label ID="lbCredentialPromptHeader" runat="server" meta:resourcekey="lbCredentialPromptHeader"></asp:Label></h1>
-
+                        <asp:Label ID="lbCredentialPromptHeader" runat="server" meta:resourcekey="lbCredentialPromptHeader" />
+                    </h1>
                     <div class="formcontent">
-                        <asp:LinkButton ID="hiddenplaceholder" runat="server"/>
+                        <asp:LinkButton ID="hiddenplaceholder" runat="server" />
                         <asp:Table runat="server">
                             <asp:TableRow>
                                 <asp:TableHeaderCell>
-                                    <asp:Label ID="lbAuthNUsername" runat="server" meta:resourcekey="lbAuthNUsername"></asp:Label>
+                                    <asp:Label ID="lbAuthNUsername" runat="server" meta:resourcekey="lbAuthNUsername" />
                                 </asp:TableHeaderCell>
                                 <asp:TableCell>
-                                    <asp:TextBox ID="txAuthNUsername" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txAuthNUsername" runat="server" />
                                 </asp:TableCell>
                             </asp:TableRow>
                             <asp:TableRow>
                                 <asp:TableHeaderCell>
-                                    <asp:Label ID="lbAuthNPassword" runat="server" meta:resourcekey="lbAuthNPassword"></asp:Label>
+                                    <asp:Label ID="lbAuthNPassword" runat="server" meta:resourcekey="lbAuthNPassword" />
                                 </asp:TableHeaderCell>
                                 <asp:TableCell>
-                                    <asp:TextBox ID="txAuthNPassword"   TextMode="Password" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txAuthNPassword" TextMode="Password" runat="server" />
                                 </asp:TableCell>
                             </asp:TableRow>
                         </asp:Table>
-
-
                         <div id="divAuthNError" class="warning" runat="server">
                             <asp:Label ID="lbAuthNError" runat="server" Text="error" />
                         </div>
@@ -110,5 +141,47 @@
             </div>
         </asp:Panel>
     </form>
+
+    <script>
+
+        window.onload = function () {
+            var inputs = document.getElementsByName("opSetMode");
+
+            if (inputs.length > 0) {
+                for (var i = 0; i < inputs.length; i++) {
+                    if (inputs[i].type == "radio") {
+                        inputs[i].onclick = function () {
+                            SetControlState(this);
+                        }
+
+                        SetControlState(inputs[i]);
+                    }
+                }
+            }
+        }
+
+        function SetControlState(control) {
+            if (control.value == "2" && control.checked) {
+                ShowControls();
+            }
+            else {
+                HideControls();
+            }
+        }
+
+        function HideControls() {
+            document.getElementById("<%=this.panelSpecifyPassword.ClientID%>").style.display = "none";
+            document.getElementById("<%=this.validatortxNewPassword1.ClientID%>").enabled = false;
+            document.getElementById("<%=this.validatortxNewPassword2.ClientID%>").enabled = false;
+            document.getElementById("<%=this.txNewPasswordCompareValidator.ClientID%>").enabled = false;
+        }
+
+        function ShowControls() {
+            document.getElementById("<%=this.panelSpecifyPassword.ClientID%>").style.display = "block";
+            document.getElementById("<%=this.validatortxNewPassword1.ClientID%>").enabled = true;
+            document.getElementById("<%=this.validatortxNewPassword2.ClientID%>").enabled = true;
+            document.getElementById("<%=this.txNewPasswordCompareValidator.ClientID%>").enabled = true;
+        }
+    </script>
 </body>
 </html>

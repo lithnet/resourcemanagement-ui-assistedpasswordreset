@@ -8,15 +8,7 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
 {
     public static class RandomValueGenerator
     {
-        private static RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
-
-        private static readonly char[] availableCharacters = {
-            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M',
-            'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'm',
-            'n', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' , '@', '#',
-            '(',')','*', '&', '$', '!'};
+        private static char[] availableCharacters = AppConfigurationSection.CurrentConfig.AllowedPasswordCharacterArray;
 
         public static string GenerateRandomString(int length)
         {
@@ -41,7 +33,7 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
         {
             if (!(length == 2 || length == 4 || length == 8))
             {
-                throw new ArgumentException("length", "Number length can only be 2, 4 or 8");
+                throw new ArgumentException(@"Number length can only be 2, 4 or 8", nameof(length));
             }
 
             byte[] randomData = new byte[length];
@@ -68,7 +60,6 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
 
             return returnValue;
         }
-
 
         public static long GenerateRandomNumber()
         {

@@ -8,6 +8,8 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
     {
         private static AppConfigurationSection current;
 
+        private char[] allowedChars;
+
         internal static AppConfigurationSection CurrentConfig
         {
             get
@@ -23,7 +25,7 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
 
         internal static AppConfigurationSection GetConfiguration()
         {
-            AppConfigurationSection section = (AppConfigurationSection) ConfigurationManager.GetSection("lithnetUserVerification");
+            AppConfigurationSection section = (AppConfigurationSection) ConfigurationManager.GetSection("lithnetAssistedPasswordReset");
 
             if (section == null)
             {
@@ -33,8 +35,8 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
             return section;
         }
 
-        [ConfigurationProperty("objectSidAttributeName", IsRequired = true, DefaultValue = "ObjectSID")]
-        public string ObjectSIDAttributeName
+        [ConfigurationProperty("objectSidAttributeName", IsRequired = false, DefaultValue = "ObjectSID")]
+        public string ObjectSidAttributeName
         {
             get
             {
@@ -46,34 +48,7 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
             }
         }
 
-        [ConfigurationProperty("displayNameAttributeName", IsRequired = true, DefaultValue = "DisplayName")]
-        public string DisplayNameAttributeName
-        {
-            get
-            {
-                return (string) this["displayNameAttributeName"];
-            }
-            set
-            {
-                this["displayNameAttributeName"] = value;
-            }
-        }
-
-
-        [ConfigurationProperty("accountNameAttributeName", IsRequired = true, DefaultValue = "AccountName")]
-        public string AccountNameAttributeName
-        {
-            get
-            {
-                return (string)this["accountNameAttributeName"];
-            }
-            set
-            {
-                this["accountNameAttributeName"] = value;
-            }
-        }
-
-        [ConfigurationProperty("searchAttributeName", IsRequired = true, DefaultValue = "ObjectID")]
+        [ConfigurationProperty("searchAttributeName", IsRequired = false, DefaultValue = "ObjectID")]
         public string SearchAttributeName
         {
             get
@@ -86,12 +61,48 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
             }
         }
 
-        [ConfigurationProperty("generatedPasswordLength", IsRequired = true, DefaultValue = 8)]
+        [ConfigurationProperty("displayAttributes", IsRequired = false, DefaultValue = "DisplayName,AccountName,Domain")]
+        public string DisplayAttributes
+        {
+            get
+            {
+                return (string)this["displayAttributes"];
+            }
+            set
+            {
+                this["displayAttributes"] = value;
+            }
+        }
+
+        [ConfigurationProperty("showNullAttributes", IsRequired = false, DefaultValue = false)]
+        public bool ShowNullAttributes
+        {
+            get
+            {
+                return (bool)this["showNullAttributes"];
+            }
+            set
+            {
+                this["showNullAttributes"] = value;
+            }
+        }
+
+        internal string[] DisplayAttributeList
+        {
+            get
+            {
+                return this.DisplayAttributes.Split(',');
+            }
+        }
+
+        [ConfigurationProperty("generatedPasswordLength", IsRequired = false, DefaultValue = 8)]
         public int GeneratedPasswordLength
         {
             get
             {
-                return (int)this["generatedPasswordLength"];
+                int value = (int)this["generatedPasswordLength"];
+
+                return value > 0 ? value : 8;
             }
             set
             {
@@ -99,7 +110,7 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
             }
         }
 
-        [ConfigurationProperty("alwaysPromptForAdminPassword", IsRequired = true, DefaultValue = false)]
+        [ConfigurationProperty("alwaysPromptForAdminPassword", IsRequired = false, DefaultValue = false)]
         public bool AlwaysPromptForAdminPassword
         {
             get
@@ -112,7 +123,7 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
             }
         }
 
-        [ConfigurationProperty("allowPasswordPromptFallback", IsRequired = true, DefaultValue = true)]
+        [ConfigurationProperty("allowPasswordPromptFallback", IsRequired = false, DefaultValue = true)]
         public bool AllowPasswordPromptFallback
         {
             get
@@ -122,6 +133,71 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
             set
             {
                 this["allowPasswordPromptFallback"] = value;
+            }
+        }
+
+        [ConfigurationProperty("forcePasswordChangeAtNextLogon", IsRequired = false, DefaultValue = true)]
+        public bool ForcePasswordChangeAtNextLogon
+        {
+            get
+            {
+                return (bool)this["forcePasswordChangeAtNextLogon"];
+            }
+            set
+            {
+                this["forcePasswordChangeAtNextLogon"] = value;
+            }
+        }
+
+        [ConfigurationProperty("passwordChangeAtNextLogonSetAsDefault", IsRequired = false, DefaultValue = true)]
+        public bool PasswordChangeAtNextLogonSetAsDefault
+        {
+            get
+            {
+                return (bool)this["passwordChangeAtNextLogonSetAsDefault"];
+            }
+            set
+            {
+                this["passwordChangeAtNextLogonSetAsDefault"] = value;
+            }
+        }
+
+        [ConfigurationProperty("allowSpecifiedPasswords", IsRequired = false, DefaultValue = true)]
+        public bool AllowSpecifiedPasswords
+        {
+            get
+            {
+                return (bool)this["allowSpecifiedPasswords"];
+            }
+            set
+            {
+                this["allowSpecifiedPasswords"] = value;
+            }
+        }
+
+        [ConfigurationProperty("allowedPasswordCharacters", IsRequired = false, DefaultValue = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz0123456789@#()*&$!")]
+        public string AllowedPasswordCharacters
+        {
+            get
+            {
+                return (string)this["allowedPasswordCharacters"];
+            }
+            set
+            {
+                this["allowedPasswordCharacters"] = value;
+            }
+        }
+
+        public char[] AllowedPasswordCharacterArray
+        {
+            get
+            {
+                if (this.allowedChars == null)
+                {
+                    this.allowedChars = this.AllowedPasswordCharacters.ToCharArray();
+                }
+
+                return this.allowedChars;
             }
         }
     }

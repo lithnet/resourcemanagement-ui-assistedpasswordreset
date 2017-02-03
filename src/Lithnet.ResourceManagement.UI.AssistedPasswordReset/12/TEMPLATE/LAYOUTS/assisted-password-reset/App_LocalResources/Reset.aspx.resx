@@ -127,23 +127,14 @@
   <data name="ErrorUserNotFound" xml:space="preserve">
     <value>The user was not found</value>
   </data>
-  <data name="btSend.Text" xml:space="preserve">
-    <value>Generate password</value>
+  <data name="GeneratePasssword" xml:space="preserve">
+    <value>Reset password</value>
   </data>
-  <data name="lbCaptionName.Text" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="lbCaptionSecurityCode.Text" xml:space="preserve">
+  <data name="NewPassword" xml:space="preserve">
     <value>New password</value>
   </data>
-  <data name="lbCaptionUsername.Text" xml:space="preserve">
-    <value>User name</value>
-  </data>
-  <data name="lbHeader.Text" xml:space="preserve">
-    <value>Password reset</value>
-  </data>
-  <data name="PageButtonGenerateNewPassword" xml:space="preserve">
-    <value>Generate new password</value>
+  <data name="GenerateNewPassword" xml:space="preserve">
+    <value>Reset password</value>
   </data>
   <data name="PageTitle" xml:space="preserve">
     <value>Password reset</value>
@@ -159,5 +150,11 @@
   </data>
   <data name="lbCredentialPromptHeader.Text" xml:space="preserve">
     <value>Enter credentials</value>
+  </data>
+  <data name="ErrorMessageBlankPassword" xml:space="preserve">
+    <value>The password cannot be blank</value>
+  </data>
+  <data name="ErrorMessagePasswordsDoNotMatch" xml:space="preserve">
+    <value>The passwords do not match</value>
   </data>
 </root>

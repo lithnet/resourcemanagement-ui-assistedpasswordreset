@@ -45,9 +45,9 @@ h1 {
     background-position: left center;
 }
 
-    #warning:empty {
-        display: none;
-    }
+.warning:empty {
+    display: none;
+}
 
 table {
     margin: 10px;
@@ -95,7 +95,7 @@ td {
 }
 
 input.button {
-    color: #6e6e6e;
+    color: #444;
     text-decoration: none;
     padding: 7px 12px;
     position: relative;
@@ -106,23 +106,22 @@ input.button {
     -o-transition: border-color .218s;
     transition: border-color .218s;
     background: #f3f3f3;
-    border: solid 1px #dcdcdc;
+    border: solid 1px #444;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
 }
 
-    input.button:hover {
-        color: #333;
-        border-color: #999;
+    input.button:hover:enabled {
         -moz-box-shadow: 0 1px 2px #777;
         -webkit-box-shadow: 0 1px 2px #777;
         box-shadow: 0 1px 2px #777;
     }
 
-    input.button:active {
-        color: #000;
-        border-color: #444;
+    input.button:disabled {
+        color: #dcdcdc;
+        background: #f3f3f3;
+        border: solid 1px #dcdcdc;
     }
 
 #btSend {
@@ -132,9 +131,12 @@ input.button {
     right: 0;
 }
 
-.ModalBackground
-{
-    background-color:Gray;
-    filter:alpha(opacity=50);
-    opacity:0.5;
+.ModalBackground {
+    background-color: Gray;
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+}
+
+.password {
+    font-family: Consolas, "Courier New", Courier, monospace
 }
