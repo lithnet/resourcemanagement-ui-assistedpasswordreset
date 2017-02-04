@@ -13,6 +13,14 @@
 
 <body>
     <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" />
+        <ajaxToolkit:ModalPopupExtender runat="server" ID="ModalPopupExtender1"
+            TargetControlID="hiddenplaceholder"
+            PopupControlID="popup"
+            BackgroundCssClass="ModalBackground"
+            CancelControlID="btCancel"
+            RepositionMode="RepositionOnWindowResizeAndScroll">
+        </ajaxToolkit:ModalPopupExtender>
 
         <div class="contentmain">
             <div class="wrapper">
@@ -95,48 +103,38 @@
             </div>
         </div>
 
-        <asp:ScriptManager ID="ScriptManager1" runat="server" />
-        <ajaxToolkit:ModalPopupExtender runat="server" ID="ModalPopupExtender1"
-            TargetControlID="hiddenplaceholder"
-            PopupControlID="popup"
-            BackgroundCssClass="ModalBackground"
-            CancelControlID="btCancel"
-            RepositionMode="RepositionOnWindowResizeAndScroll">
-        </ajaxToolkit:ModalPopupExtender>
 
         <asp:Panel ID="popup" runat="server" DefaultButton="btAuthN" Style="display: none">
-            <div class="contentmain">
-                <div class="wrapper">
-                    <h1>
-                        <asp:Label ID="lbCredentialPromptHeader" runat="server" meta:resourcekey="lbCredentialPromptHeader" />
-                    </h1>
-                    <div class="formcontent">
-                        <asp:LinkButton ID="hiddenplaceholder" runat="server" />
-                        <asp:Table runat="server">
-                            <asp:TableRow>
-                                <asp:TableHeaderCell>
-                                    <asp:Label ID="lbAuthNUsername" runat="server" meta:resourcekey="lbAuthNUsername" />
-                                </asp:TableHeaderCell>
-                                <asp:TableCell>
-                                    <asp:TextBox ID="txAuthNUsername" runat="server" />
-                                </asp:TableCell>
-                            </asp:TableRow>
-                            <asp:TableRow>
-                                <asp:TableHeaderCell>
-                                    <asp:Label ID="lbAuthNPassword" runat="server" meta:resourcekey="lbAuthNPassword" />
-                                </asp:TableHeaderCell>
-                                <asp:TableCell>
-                                    <asp:TextBox ID="txAuthNPassword" TextMode="Password" runat="server" />
-                                </asp:TableCell>
-                            </asp:TableRow>
-                        </asp:Table>
-                        <div id="divAuthNError" class="warning" runat="server">
-                            <asp:Label ID="lbAuthNError" runat="server" Text="error" />
-                        </div>
-
-                        <asp:Button ID="btAuthN" runat="server" OnClick="btAuthN_OnClick" meta:resourcekey="btAuthN" CssClass="button" />
-                        <asp:Button ID="btCancel" Text="Cancel" runat="server" OnClick="btCancel_OnClick" CssClass="button" />
+            <div class="popupcontent">
+                <h1>
+                    <asp:Label ID="lbCredentialPromptHeader" runat="server" meta:resourcekey="lbCredentialPromptHeader" />
+                </h1>
+                <div class="formcontent">
+                    <asp:LinkButton ID="hiddenplaceholder" runat="server" />
+                    <asp:Table runat="server">
+                        <asp:TableRow>
+                            <asp:TableHeaderCell>
+                                <asp:Label ID="lbAuthNUsername" runat="server" meta:resourcekey="lbAuthNUsername" />
+                            </asp:TableHeaderCell>
+                            <asp:TableCell>
+                                <asp:TextBox ID="txAuthNUsername" runat="server" />
+                            </asp:TableCell>
+                        </asp:TableRow>
+                        <asp:TableRow>
+                            <asp:TableHeaderCell>
+                                <asp:Label ID="lbAuthNPassword" runat="server" meta:resourcekey="lbAuthNPassword" />
+                            </asp:TableHeaderCell>
+                            <asp:TableCell>
+                                <asp:TextBox ID="txAuthNPassword" TextMode="Password" runat="server" />
+                            </asp:TableCell>
+                        </asp:TableRow>
+                    </asp:Table>
+                    <div id="divAuthNError" class="warning" runat="server">
+                        <asp:Label ID="lbAuthNError" runat="server" Text="error" />
                     </div>
+
+                    <asp:Button ID="btAuthN" runat="server" OnClick="btAuthN_OnClick" meta:resourcekey="btAuthN" CssClass="button" />
+                    <asp:Button ID="btCancel" Text="Cancel" runat="server" OnClick="btCancel_OnClick" CssClass="button" />
                 </div>
             </div>
         </asp:Panel>

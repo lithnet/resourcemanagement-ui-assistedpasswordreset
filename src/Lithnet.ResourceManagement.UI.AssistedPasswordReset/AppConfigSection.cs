@@ -110,7 +110,7 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
             }
         }
 
-        [ConfigurationProperty("alwaysPromptForAdminPassword", IsRequired = false, DefaultValue = false)]
+        [ConfigurationProperty("alwaysPromptForAdminPassword", IsRequired = false, DefaultValue = true)]
         public bool AlwaysPromptForAdminPassword
         {
             get
@@ -136,7 +136,7 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
             }
         }
 
-        [ConfigurationProperty("forcePasswordChangeAtNextLogon", IsRequired = false, DefaultValue = true)]
+        [ConfigurationProperty("forcePasswordChangeAtNextLogon", IsRequired = false, DefaultValue = false)]
         public bool ForcePasswordChangeAtNextLogon
         {
             get

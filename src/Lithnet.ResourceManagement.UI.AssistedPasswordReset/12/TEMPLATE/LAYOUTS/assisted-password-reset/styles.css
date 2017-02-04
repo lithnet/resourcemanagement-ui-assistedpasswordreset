@@ -12,6 +12,13 @@
         border-radius: 10px;
     }
 
+
+.popupcontent {
+    background-color: #fff;
+    border: solid 2px #444;
+    border-radius: 10px;
+}
+
 .formcontent {
     margin: 10px;
 }
@@ -45,9 +52,9 @@ h1 {
     background-position: left center;
 }
 
-.warning:empty {
-    display: none;
-}
+    .warning:empty {
+        display: none;
+    }
 
 table {
     margin: 10px;
@@ -138,5 +145,5 @@ input.button {
 }
 
 .password {
-    font-family: Consolas, "Courier New", Courier, monospace
+    font-family: Consolas, "Courier New", Courier, monospace;
 }
