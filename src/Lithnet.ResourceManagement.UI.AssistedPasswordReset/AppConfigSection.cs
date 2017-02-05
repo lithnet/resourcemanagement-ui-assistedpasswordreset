@@ -110,7 +110,7 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
             }
         }
 
-        [ConfigurationProperty("alwaysPromptForAdminPassword", IsRequired = false, DefaultValue = true)]
+        [ConfigurationProperty("alwaysPromptForAdminPassword", IsRequired = false, DefaultValue = false)]
         public bool AlwaysPromptForAdminPassword
         {
             get

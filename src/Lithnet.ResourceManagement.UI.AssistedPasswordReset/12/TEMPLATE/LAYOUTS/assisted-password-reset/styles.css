@@ -17,10 +17,12 @@
     background-color: #fff;
     border: solid 2px #444;
     border-radius: 10px;
+    color: #3e4e5b;
+
 }
 
 .formcontent {
-    margin: 10px;
+    margin: 20px;
 }
 
 html {
@@ -31,10 +33,6 @@ body {
     font-family: "Segoe UI","Helvetica","Verdana", "Arial", "Sans-Serif";
     font-size: 14px;
 }
-
-/*form {
-    margin: 10px;
-}*/
 
 h1 {
     font-size: 22px;
@@ -56,10 +54,12 @@ h1 {
         display: none;
     }
 
-table {
-    margin: 10px;
-    margin-bottom: 10px;
-    margin-top: 10px;
+#passwordOptions {
+    color: #3e4e5b;
+}
+
+.dataTable {
+    margin: 10px 0 0px 0;
     width: 400px;
     border-top: 1px solid #e5eff8;
     border-right: 1px solid #e5eff8;
@@ -67,28 +67,97 @@ table {
     border-style: hidden;
 }
 
-th {
-    padding: 10px;
-    white-space: nowrap;
-    text-align: right;
-    font-weight: 600;
-    color: #678197;
-    border-bottom: 1px solid #e5eff8;
-    border-left: 1px solid #e5eff8;
+    .dataTable th {
+        padding: 10px;
+        white-space: nowrap;
+        text-align: right;
+        font-weight: 600;
+        color: #678197;
+        border-bottom: 1px solid #e5eff8;
+        border-left: 1px solid #e5eff8;
+    }
+
+    .dataTable td {
+        padding: 10px;
+        text-align: left;
+        width: 100%;
+        color: #678197;
+        border-bottom: 1px solid #e5eff8;
+    }
+
+#ckUserMustChangePassword {
+    /*margin: 10px 10px 20px 10px;*/
+    border: 0;
 }
 
-td {
-    padding: 10px;
-    text-align: left;
+#opSetMode {
+    margin: 10px 0 10px 0;
+    width: 400px;
+    border: 0;
+}
+
+    #opSetMode th {
+        padding: 2px;
+        white-space: nowrap;
+        text-align: right;
+        font-weight: 600;
+        color: #3e4e5b;
+    }
+
+    #opSetMode td {
+        padding: 2px;
+        text-align: left;
+        width: 100%;
+        color: #3e4e5b;
+    }
+
+        #opSetMode td.spacedOptCell {
+            padding: 2px;
+            padding-top: 22px;
+            text-align: left;
+            width: 100%;
+            color: #3e4e5b;
+        }
+
+
+.fullWidthControl {
     width: 100%;
-    color: #678197;
-    border-bottom: 1px solid #e5eff8;
 }
 
-#result {
-    margin-top: 10px;
-    margin-bottom: 10px;
+.credentialTable {
+    margin: 0px;
+    width: 400px;
+    border-top: 1px solid #e5eff8;
+    border-right: 1px solid #e5eff8;
+    border-collapse: collapse;
+    border-style: hidden;
 }
+
+    .credentialTable th {
+        padding: 5px;
+        white-space: nowrap;
+        text-align: right;
+        font-weight: normal;
+        /*font-weight: 600;*/
+        /*color: #678197;*/
+        /*border-bottom: 1px solid #e5eff8;*/
+        /*border-left: 1px solid #e5eff8;*/
+    }
+
+    .credentialTable td {
+        padding: 5px;
+        width: 100%;
+        text-align: left;
+        /*color: #678197;*/
+        /*border-bottom: 1px solid #e5eff8;*/
+    }
+
+        .credentialTable td.validationMessageCell {
+            padding: 5px;
+            text-align: left;
+            /*color: #678197;*/
+            /*border-bottom: 1px solid #e5eff8;*/
+        }
 
 #header {
     position: relative;
@@ -131,11 +200,13 @@ input.button {
         border: solid 1px #dcdcdc;
     }
 
-#btSend {
-    margin: auto;
-    display: block;
-    position: relative;
-    right: 0;
+.buttonRow {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#resultRow {
+    /*margin: 10px*/
 }
 
 .ModalBackground {

@@ -67,13 +67,13 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset {
         protected global::System.Web.UI.WebControls.Table attributeTable;
         
         /// <summary>
-        /// ckUserMustChangePassword control.
+        /// passwordOptions control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox ckUserMustChangePassword;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl passwordOptions;
         
         /// <summary>
         /// opSetMode control.
@@ -139,31 +139,31 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset {
         protected global::System.Web.UI.WebControls.CompareValidator txNewPasswordCompareValidator;
         
         /// <summary>
-        /// divWarning control.
+        /// ckUserMustChangePassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divWarning;
+        protected global::System.Web.UI.WebControls.CheckBox ckUserMustChangePassword;
         
         /// <summary>
-        /// lbWarning control.
+        /// resultRow control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbWarning;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl resultRow;
         
         /// <summary>
-        /// tableNewPassword control.
+        /// tableGeneratedPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tableNewPassword;
+        protected global::System.Web.UI.WebControls.Table tableGeneratedPassword;
         
         /// <summary>
         /// lbNewPasswordCaption control.
@@ -200,6 +200,33 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbPasswordSetMessage;
+        
+        /// <summary>
+        /// divWarning control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divWarning;
+        
+        /// <summary>
+        /// lbWarning control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbWarning;
+        
+        /// <summary>
+        /// btStartAgain control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btStartAgain;
         
         /// <summary>
         /// btReset control.

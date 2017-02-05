@@ -121,8 +121,7 @@
     <value>No SID target available</value>
   </data>
   <data name="ErrorMessagePasswordSetFailure" xml:space="preserve">
-    <value>An error occured setting the password:
-{0}</value>
+    <value>An error occured setting the password</value>
   </data>
   <data name="ErrorUserNotFound" xml:space="preserve">
     <value>The user was not found</value>
@@ -156,5 +155,8 @@
   </data>
   <data name="ErrorMessagePasswordsDoNotMatch" xml:space="preserve">
     <value>The passwords do not match</value>
+  </data>
+  <data name="ErrorInvalidUsernameOrPassword" xml:space="preserve">
+    <value>Invalid username or password</value>
   </data>
 </root>

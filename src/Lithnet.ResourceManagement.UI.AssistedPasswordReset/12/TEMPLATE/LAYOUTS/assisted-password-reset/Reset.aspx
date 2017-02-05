@@ -32,72 +32,79 @@
                 </h1>
 
                 <div class="formcontent">
-                    <asp:Table runat="server" ID="attributeTable" />
+                    <asp:Table runat="server" ID="attributeTable" CssClass="dataTable" />
 
-                    <div>
-                        <asp:CheckBox ID="ckUserMustChangePassword" runat="server" Text="User must change password at next login" />
+                    <div id="passwordOptions" runat="server">
+
                         <asp:RadioButtonList runat="server" ID="opSetMode" ClientIDMode="Static">
                             <asp:ListItem Text="Automatically generate new password" Selected="True" Value="1" />
                             <asp:ListItem Text="Specify a password" Value="2" />
                         </asp:RadioButtonList>
-                    </div>
 
-                    <asp:Panel ID="panelSpecifyPassword" runat="server">
-                        <div>
-                            <table>
+                        <asp:Panel ID="panelSpecifyPassword" runat="server">
+                            <table id="tableSpecifyPassword" class="credentialTable">
                                 <tr>
-                                    <td>New password:</td>
+                                    <th>New password</th>
                                     <td>
-
-                                        <asp:TextBox ID="txNewPassword1" runat="server" TextMode="Password" />
+                                        <asp:TextBox ID="txNewPassword1" runat="server" TextMode="Password" CssClass="fullWidthControl" />
+                                    </td>
+                                    <td class="validationMessageCell">
                                         <asp:RequiredFieldValidator ID="validatortxNewPassword1" runat="server"
                                             ControlToValidate="txNewPassword1"
                                             CssClass="ValidationError"
-                                            ErrorMessage="&laquo; (Required)"
-                                            ToolTip="User Name is a REQUIRED field"></asp:RequiredFieldValidator>
+                                            ErrorMessage="Required"
+                                            Display="Dynamic" />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Confirm new password:</td>
+                                    <th>Confirm password</th>
                                     <td>
-                                        <asp:TextBox ID="txNewPassword2" runat="server" TextMode="Password" />
+                                        <asp:TextBox ID="txNewPassword2" runat="server" TextMode="Password" CssClass="fullWidthControl" />
+                                    </td>
+                                    <td class="validationMessageCell">
                                         <asp:RequiredFieldValidator ID="validatortxNewPassword2" runat="server"
                                             ControlToValidate="txNewPassword2"
                                             CssClass="ValidationError"
-                                            ErrorMessage="&laquo; (Required)"
-                                            ToolTip="User Name is a REQUIRED field"></asp:RequiredFieldValidator>
+                                            ErrorMessage="Required"
+                                            Display="Dynamic" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
                                         <asp:CompareValidator ID="txNewPasswordCompareValidator" runat="server"
                                             ControlToValidate="txNewPassword2"
                                             CssClass="ValidationError"
                                             ControlToCompare="txNewPassword1"
                                             ErrorMessage="The passwords do not match"
-                                            ToolTip="Password must be the same" />
+                                            Display="Dynamic" />
                                     </td>
                                 </tr>
                             </table>
+                        </asp:Panel>
+
+                        <asp:CheckBox ID="ckUserMustChangePassword" runat="server" Text="User must change password at next login" />
+                    </div>
+
+                    <div id="resultRow" runat="server">
+                        <asp:Table runat="server" ID="tableGeneratedPassword" CssClass="dataTable">
+                            <asp:TableRow>
+                                <asp:TableHeaderCell>
+                                    <asp:Label runat="server" ID="lbNewPasswordCaption" />
+                                </asp:TableHeaderCell><asp:TableCell>
+                                    <asp:Label ID="lbNewPassword" runat="server" CssClass="password" />
+                                </asp:TableCell></asp:TableRow></asp:Table><div id="divPasswordSetMessage" runat="server">
+                            <asp:Label ID="lbPasswordSetMessage" runat="server" />
                         </div>
-                    </asp:Panel>
 
-                    <div id="divWarning" class="warning" runat="server">
-                        <asp:Label ID="lbWarning" runat="server" />
+                        <div id="divWarning" class="warning" runat="server">
+                            <asp:Label ID="lbWarning" runat="server" />
+                        </div>
                     </div>
 
-                    <asp:Table runat="server" ID="tableNewPassword">
-                        <asp:TableRow>
-                            <asp:TableHeaderCell>
-                                <asp:Label runat="server" ID="lbNewPasswordCaption" />
-                            </asp:TableHeaderCell>
-                            <asp:TableCell>
-                                <asp:Label ID="lbNewPassword" class="password" runat="server" />
-                            </asp:TableCell>
-                        </asp:TableRow>
-                    </asp:Table>
-
-                    <div id="divPasswordSetMessage" runat="server">
-                        <asp:Label ID="lbPasswordSetMessage" runat="server" />
+                    <div class="buttonRow">
+                        <asp:Button ID="btStartAgain" runat="server" OnClientClick="ResetPage(); return false;" CssClass="button" Visible="false" Text="Start again" />
+                        <asp:Button ID="btReset" runat="server" OnClick="btReset_Click" CssClass="button" />
                     </div>
-
-                    <asp:Button ID="btReset" runat="server" OnClick="btReset_Click" CssClass="button" />
 
                 </div>
             </div>
@@ -111,30 +118,25 @@
                 </h1>
                 <div class="formcontent">
                     <asp:LinkButton ID="hiddenplaceholder" runat="server" />
-                    <asp:Table runat="server">
+                    <asp:Table runat="server" CssClass="credentialTable">
                         <asp:TableRow>
                             <asp:TableHeaderCell>
                                 <asp:Label ID="lbAuthNUsername" runat="server" meta:resourcekey="lbAuthNUsername" />
-                            </asp:TableHeaderCell>
-                            <asp:TableCell>
-                                <asp:TextBox ID="txAuthNUsername" runat="server" />
-                            </asp:TableCell>
-                        </asp:TableRow>
-                        <asp:TableRow>
+                            </asp:TableHeaderCell><asp:TableCell>
+                                <asp:TextBox ID="txAuthNUsername" runat="server" CssClass="fullWidthControl" />
+                            </asp:TableCell></asp:TableRow><asp:TableRow>
                             <asp:TableHeaderCell>
                                 <asp:Label ID="lbAuthNPassword" runat="server" meta:resourcekey="lbAuthNPassword" />
-                            </asp:TableHeaderCell>
-                            <asp:TableCell>
-                                <asp:TextBox ID="txAuthNPassword" TextMode="Password" runat="server" />
-                            </asp:TableCell>
-                        </asp:TableRow>
-                    </asp:Table>
-                    <div id="divAuthNError" class="warning" runat="server">
+                            </asp:TableHeaderCell><asp:TableCell>
+                                <asp:TextBox ID="txAuthNPassword" TextMode="Password" runat="server" CssClass="fullWidthControl" />
+                            </asp:TableCell></asp:TableRow></asp:Table><div id="divAuthNError" class="warning" runat="server">
                         <asp:Label ID="lbAuthNError" runat="server" Text="error" />
                     </div>
 
-                    <asp:Button ID="btAuthN" runat="server" OnClick="btAuthN_OnClick" meta:resourcekey="btAuthN" CssClass="button" />
-                    <asp:Button ID="btCancel" Text="Cancel" runat="server" OnClick="btCancel_OnClick" CssClass="button" />
+                    <div class="buttonRow">
+                        <asp:Button ID="btAuthN" runat="server" OnClick="btAuthN_OnClick" meta:resourcekey="btAuthN" CssClass="button" />
+                        <asp:Button ID="btCancel" Text="Cancel" runat="server" OnClick="btCancel_OnClick" CssClass="button" />
+                    </div>
                 </div>
             </div>
         </asp:Panel>
@@ -165,6 +167,10 @@
             else {
                 HideControls();
             }
+        }
+
+        function ResetPage() {
+            window.location.href = "<%=this.Request.RawUrl%>";
         }
 
         function HideControls() {

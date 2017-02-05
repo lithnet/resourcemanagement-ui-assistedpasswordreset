@@ -8,6 +8,7 @@ using System.Security.Principal;
 using System.Web.UI.WebControls;
 using Lithnet.ResourceManagement.Client;
 using SD = System.Diagnostics;
+using System.Linq;
 
 namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
 {
@@ -66,35 +67,53 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
             }
         }
 
-        public string UserObjectID => this.Request.QueryString["id"];
+        private string UserObjectID => this.Request.QueryString["id"];
 
-        public string ObjectType => this.Request.QueryString["type"] ?? "Person";
+        private string ObjectType => this.Request.QueryString["type"] ?? "Person";
 
+        private string SpecifiedPassword
+        {
+            get
+            {
+                return (string)this.ViewState[nameof(this.SpecifiedPassword)];
+            }
+            set
+            {
+                this.ViewState[nameof(this.SpecifiedPassword)] = value;
+            }
+        }
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
                 SD.Trace.WriteLine($"Loading page. IsPostBack: {this.Page.IsPostBack}");
-
-                this.txAuthNUsername.Text = System.Threading.Thread.CurrentPrincipal.Identity.Name;
                 SD.Trace.WriteLine($"Loaded page as {System.Threading.Thread.CurrentPrincipal.Identity.Name} using {System.Threading.Thread.CurrentPrincipal.Identity.AuthenticationType} authentication");
 
                 if (this.Page.IsPostBack)
                 {
+                    if (this.SpecifiedPassword != null)
+                    {
+                        this.txNewPassword1.Attributes.Add("value", this.SpecifiedPassword);
+                        this.txNewPassword2.Attributes.Add("value", this.SpecifiedPassword);
+                    }
+
                     this.ReloadTableStructure();
                     return;
                 }
 
+                this.txAuthNUsername.Text = System.Threading.Thread.CurrentPrincipal.Identity.Name;
                 this.pageTitle.Text = (string)this.GetLocalResourceObject("PageTitle");
                 this.lbHeader.Text = (string)this.GetLocalResourceObject("PageTitle");
                 this.btReset.Text = (string)this.GetLocalResourceObject("GenerateNewPassword");
                 this.ckUserMustChangePassword.Checked = AppConfigurationSection.CurrentConfig.ForcePasswordChangeAtNextLogon || AppConfigurationSection.CurrentConfig.PasswordChangeAtNextLogonSetAsDefault;
                 this.ckUserMustChangePassword.Enabled = !AppConfigurationSection.CurrentConfig.ForcePasswordChangeAtNextLogon;
                 this.opSetMode.Visible = AppConfigurationSection.CurrentConfig.AllowSpecifiedPasswords;
-                this.tableNewPassword.Visible = false;
-                this.divPasswordSetMessage.Visible = false;
-                this.lbNewPasswordCaption.Text = (string) this.GetLocalResourceObject("NewPassword");
-                this.ClearError();
+                this.resultRow.Visible = false;
+                this.divWarning.Visible = false;
+                //this.tableGeneratedPassword.Visible = false;
+                //this.divPasswordSetMessage.Visible = false;
+                this.lbNewPasswordCaption.Text = (string)this.GetLocalResourceObject("NewPassword");
 
                 ResourceManagementClient c = new ResourceManagementClient();
                 List<string> attributeList = new List<string>();
@@ -128,7 +147,6 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
                 {
                     this.SidTarget = new SecurityIdentifier(o.Attributes[AppConfigurationSection.CurrentConfig.ObjectSidAttributeName].BinaryValue, 0).ToString();
                     SD.Trace.WriteLine($"Set target set to {this.SidTarget}");
-                    this.ClearError();
                 }
             }
             catch (Exception ex)
@@ -138,29 +156,15 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
             }
         }
 
-        private void ClearError()
-        {
-            this.SetError(null);
-        }
-
         private void SetError(string message)
         {
-            if (message == null)
-            {
-                this.divWarning.Visible = false;
-                this.lbWarning.Text = null;
-                this.btReset.Enabled = true;
-                this.tableNewPassword.Visible = false;
-                this.divPasswordSetMessage.Visible = false;
-            }
-            else
-            {
-                this.divWarning.Visible = true;
-                this.lbWarning.Text = message;
-                this.btReset.Enabled = false;
-                this.tableNewPassword.Visible = false;
-                this.divPasswordSetMessage.Visible = false;
-            }
+            this.passwordOptions.Visible = false;
+            this.divWarning.Visible = true;
+            this.lbWarning.Text = message;
+            this.btReset.Enabled = false;
+            this.resultRow.Visible = true;
+            this.tableGeneratedPassword.Visible = false;
+            this.divPasswordSetMessage.Visible = false;
         }
 
         private void BuildAttributeTable(ResourceObject o)
@@ -181,16 +185,19 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
                 return;
             }
 
-            TableRow row = new TableRow();
-            row.ID = $"row{rowCount}";
+            TableRow row = new TableRow { ID = $"row{rowCount}" };
 
-            TableHeaderCell hc = new TableHeaderCell { Text = header };
-            hc.ID = $"th{rowCount}";
-            row.Cells.Add(hc);
+            row.Cells.Add(new TableHeaderCell
+            {
+                Text = header,
+                ID = $"th{rowCount}"
+            });
 
-            TableCell tc = new TableCell { Text = value };
-            tc.ID = $"tc{rowCount}";
-            row.Cells.Add(tc);
+            row.Cells.Add(new TableCell
+            {
+                Text = value,
+                ID = $"tc{rowCount}"
+            });
 
             this.attributeTable.Rows.Add(row);
 
@@ -215,18 +222,19 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
             {
                 int i = this.attributeTable.Rows.Count;
 
-                TableRow row = new TableRow();
-                row.ID = $"row{i}";
+                TableRow row = new TableRow { ID = $"row{i}" };
 
-                TableHeaderCell hc = new TableHeaderCell();
-                hc.ID = $"th{i}";
-                hc.Text = kvp.Key;
-                row.Cells.Add(hc);
+                row.Cells.Add(new TableHeaderCell
+                {
+                    ID = $"th{i}",
+                    Text = kvp.Key
+                });
 
-                TableCell tc = new TableCell();
-                tc.ID = $"tc{i}";
-                tc.Text = kvp.Value;
-                row.Cells.Add(tc);
+                row.Cells.Add(new TableCell
+                {
+                    ID = $"tc{i}",
+                    Text = kvp.Value
+                });
 
                 this.attributeTable.Rows.Add(row);
 
@@ -248,6 +256,9 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
                 this.divAuthNError.Visible = false;
                 this.ModalPopupExtender1.Show();
                 this.txAuthNPassword.Focus();
+                this.validatortxNewPassword1.Enabled = false;
+                this.validatortxNewPassword2.Enabled = false;
+                this.txNewPasswordCompareValidator.Enabled = false;
                 return null;
             }
             else
@@ -275,7 +286,7 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
             {
                 SD.Trace.WriteLine($"Searching for user {this.SidTarget}");
 
-                var user = UserPrincipal.FindByIdentity(context, IdentityType.Sid, this.SidTarget);
+                UserPrincipal user = UserPrincipal.FindByIdentity(context, IdentityType.Sid, this.SidTarget);
 
                 if (user == null)
                 {
@@ -288,7 +299,7 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
             }
             catch (DirectoryServicesCOMException ex)
             {
-                SD.Trace.WriteLine($"Directory exception encountered: {ex.ToString()}");
+                SD.Trace.WriteLine($"Directory exception encountered: {ex}");
 
                 if (!canRetry || !AppConfigurationSection.CurrentConfig.AllowPasswordPromptFallback)
                 {
@@ -332,13 +343,14 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
                     return;
                 }
 
-                if (string.IsNullOrWhiteSpace(this.txNewPassword1.Text))
+                if (string.IsNullOrWhiteSpace(this.txNewPassword1.Text) && this.SpecifiedPassword == null)
                 {
                     this.SetError((string)this.GetLocalResourceObject("ErrorMessageBlankPassword"));
                     return;
                 }
 
-                password = this.txNewPassword1.Text;
+                password = this.txNewPassword1.Text ?? this.SpecifiedPassword;
+                this.SpecifiedPassword = password;
                 SD.Trace.WriteLine("Using specified password");
             }
             else
@@ -359,8 +371,6 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
                     SD.Trace.WriteLine("Target validation failed. Aborting");
                     return;
                 }
-
-                this.ClearError();
 
                 PrincipalContext context = this.GetPrincipalContext(false);
 
@@ -394,28 +404,35 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
                             SD.Trace.WriteLine($"Password set to require change on next login");
                         }
 
+                        this.resultRow.Visible = true;
+
                         if (this.opSetMode.SelectedValue == "2")
                         {
+                            this.tableGeneratedPassword.Visible = false;
                             this.divPasswordSetMessage.Visible = true;
                             this.lbPasswordSetMessage.Text = "The password was set successfully";
                         }
                         else
                         {
-                            this.tableNewPassword.Visible = true;
+                            this.divPasswordSetMessage.Visible = false;
+                            this.tableGeneratedPassword.Visible = true;
                             this.lbNewPassword.Text = password;
                         }
+
+                        this.passwordOptions.Visible = false;
 
                         this.opSetMode.SelectedValue = "1";
                     }
                 }
 
-                this.btReset.Text = (string)this.GetLocalResourceObject("GenerateNewPassword");
+                this.btReset.Visible = false;
+                this.btStartAgain.Visible = true;
 
             }
             catch (Exception ex)
             {
                 SD.Trace.WriteLine($"Exception setting password for to {this.SidTarget.ToString()}\n {ex.ToString()}");
-                this.SetError(string.Format((string)this.GetLocalResourceObject("ErrorMessagePasswordSetFailure"), ex.ToString()));
+                this.SetError($"{(string)this.GetLocalResourceObject("ErrorMessagePasswordSetFailure")} {ex}");
             }
             finally
             {
@@ -433,6 +450,7 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
         {
             using (PrincipalContext context = new PrincipalContext(ContextType.Domain))
             {
+                SD.Trace.WriteLine($"Attempting to validate {this.txAuthNUsername.Text}");
                 return context.ValidateCredentials(this.txAuthNUsername.Text, this.txAuthNPassword.Text);
             }
         }
@@ -451,7 +469,7 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
             {
                 SD.Trace.WriteLine("Credentials did not validate");
                 this.divAuthNError.Visible = true;
-                this.lbAuthNError.Text = "Invalid username or password";
+                this.lbAuthNError.Text = (string)this.GetLocalResourceObject("ErrorInvalidUsernameOrPassword");
                 this.lbAuthNPassword.Text = null;
                 this.lbAuthNUsername.Focus();
                 this.ModalPopupExtender1.Show();
