@@ -82,23 +82,24 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
                 this.ViewState[nameof(this.SpecifiedPassword)] = value;
             }
         }
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
-                SD.Trace.WriteLine($"Loading page. IsPostBack: {this.Page.IsPostBack}");
+                SD.Trace.WriteLine($"Loading page. IsPostBack: {this.Page.IsPostBack}. IsPartialPostBack: {System.Web.UI.ScriptManager.GetCurrent(this.Page).IsInAsyncPostBack}");
                 SD.Trace.WriteLine($"Loaded page as {System.Threading.Thread.CurrentPrincipal.Identity.Name} using {System.Threading.Thread.CurrentPrincipal.Identity.AuthenticationType} authentication");
 
                 if (this.Page.IsPostBack)
                 {
-                    if (this.SpecifiedPassword != null)
+
+                    if (!System.Web.UI.ScriptManager.GetCurrent(this.Page).IsInAsyncPostBack)
                     {
-                        this.txNewPassword1.Attributes.Add("value", this.SpecifiedPassword);
-                        this.txNewPassword2.Attributes.Add("value", this.SpecifiedPassword);
+                        return;
                     }
 
-                    this.ReloadTableStructure();
+
+                    //this.ReloadTableStructure();
                     return;
                 }
 
@@ -158,10 +159,13 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
 
         private void SetError(string message)
         {
+            SD.Trace.WriteLine($"Setting error meesage: {message}");
             this.passwordOptions.Visible = false;
             this.divWarning.Visible = true;
             this.lbWarning.Text = message;
             this.btReset.Enabled = false;
+            this.btReset.Visible = false;
+            this.btStartAgain.Visible = true;
             this.resultRow.Visible = true;
             this.tableGeneratedPassword.Visible = false;
             this.divPasswordSetMessage.Visible = false;
@@ -335,7 +339,7 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
         {
             string password;
 
-            if (this.opSetMode.SelectedValue == "2" && AppConfigurationSection.CurrentConfig.AllowSpecifiedPasswords)
+            if (this.opPasswordSpecify.Checked && AppConfigurationSection.CurrentConfig.AllowSpecifiedPasswords)
             {
                 if (this.txNewPassword1.Text != this.txNewPassword2.Text)
                 {
@@ -349,8 +353,16 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
                     return;
                 }
 
-                password = this.txNewPassword1.Text ?? this.SpecifiedPassword;
-                this.SpecifiedPassword = password;
+                if (string.IsNullOrEmpty(this.SpecifiedPassword))
+                {
+                    password = this.txNewPassword1.Text;
+                    this.SpecifiedPassword = password;
+                }
+                else
+                {
+                    password = this.SpecifiedPassword;
+                }
+
                 SD.Trace.WriteLine("Using specified password");
             }
             else
@@ -406,7 +418,7 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
 
                         this.resultRow.Visible = true;
 
-                        if (this.opSetMode.SelectedValue == "2")
+                        if (this.opPasswordSpecify.Checked)
                         {
                             this.tableGeneratedPassword.Visible = false;
                             this.divPasswordSetMessage.Visible = true;
@@ -421,13 +433,13 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
 
                         this.passwordOptions.Visible = false;
 
-                        this.opSetMode.SelectedValue = "1";
+                        this.opPasswordGenerate.Checked = true;
                     }
                 }
 
                 this.btReset.Visible = false;
                 this.btStartAgain.Visible = true;
-
+                this.up2.Update();
             }
             catch (Exception ex)
             {
@@ -482,6 +494,11 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
             this.divAuthNError.Visible = false;
             this.HasCredentials = false;
             this.ModalPopupExtender1.Hide();
+        }
+
+        protected void opSetMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.panelSpecifyPassword.Visible = this.opPasswordSpecify.Checked;
         }
     }
 }
