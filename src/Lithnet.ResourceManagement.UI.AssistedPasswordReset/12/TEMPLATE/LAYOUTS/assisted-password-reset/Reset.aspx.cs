@@ -450,6 +450,7 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
             {
                 this.HasCredentials = false;
                 this.txAuthNPassword.Text = null;
+                this.SpecifiedPassword = null;
             }
         }
 
