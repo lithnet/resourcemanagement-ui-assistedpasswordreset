@@ -238,15 +238,6 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset {
         protected global::System.Web.UI.WebControls.Label lbWarning;
         
         /// <summary>
-        /// btStartAgain control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btStartAgain;
-        
-        /// <summary>
         /// btReset control.
         /// </summary>
         /// <remarks>
@@ -254,6 +245,15 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btReset;
+        
+        /// <summary>
+        /// btClose control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btClose;
         
         /// <summary>
         /// UpdatePanel1 control.
@@ -301,15 +301,6 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset {
         protected global::System.Web.UI.WebControls.LinkButton hiddenplaceholder;
         
         /// <summary>
-        /// lbAuthNUsername control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbAuthNUsername;
-        
-        /// <summary>
         /// txAuthNUsername control.
         /// </summary>
         /// <remarks>
@@ -317,15 +308,6 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txAuthNUsername;
-        
-        /// <summary>
-        /// lbAuthNPassword control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbAuthNPassword;
         
         /// <summary>
         /// txAuthNPassword control.

@@ -104,9 +104,9 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
                 }
 
                 this.txAuthNUsername.Text = System.Threading.Thread.CurrentPrincipal.Identity.Name;
-                this.pageTitle.Text = (string)this.GetLocalResourceObject("PageTitle");
-                this.lbHeader.Text = (string)this.GetLocalResourceObject("PageTitle");
-                this.btReset.Text = (string)this.GetLocalResourceObject("GenerateNewPassword");
+                //this.pageTitle.Text = (string)this.GetLocalResourceObject("PageTitle");
+                //this.lbHeader.Text = (string)this.GetLocalResourceObject("PageTitle");
+                //this.btReset.Text = (string)this.GetLocalResourceObject("GenerateNewPassword");
                 this.ckUserMustChangePassword.Checked = AppConfigurationSection.CurrentConfig.ForcePasswordChangeAtNextLogon || AppConfigurationSection.CurrentConfig.PasswordChangeAtNextLogonSetAsDefault;
                 this.ckUserMustChangePassword.Enabled = !AppConfigurationSection.CurrentConfig.ForcePasswordChangeAtNextLogon;
                 this.opSetMode.Visible = AppConfigurationSection.CurrentConfig.AllowSpecifiedPasswords;
@@ -114,7 +114,7 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
                 this.divWarning.Visible = false;
                 //this.tableGeneratedPassword.Visible = false;
                 //this.divPasswordSetMessage.Visible = false;
-                this.lbNewPasswordCaption.Text = (string)this.GetLocalResourceObject("NewPassword");
+                //this.lbNewPasswordCaption.Text = (string)this.GetLocalResourceObject("NewPassword");
 
                 ResourceManagementClient c = new ResourceManagementClient();
                 List<string> attributeList = new List<string>();
@@ -142,7 +142,7 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
 
                 if (o.Attributes[AppConfigurationSection.CurrentConfig.ObjectSidAttributeName].IsNull)
                 {
-                    this.SetError("The user's security ID was not found");
+                    this.SetError((string)this.GetLocalResourceObject("SIDNotFound"));
                 }
                 else
                 {
@@ -152,20 +152,19 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
             }
             catch (Exception ex)
             {
-                SD.Trace.WriteLine($"Exception in page_load\n {ex.ToString()}");
-                this.SetError("An unexpected error occurred:\n" + ex.ToString());
+                SD.Trace.WriteLine($"Exception in page_load\n {ex}");
+                this.SetError("An unexpected error occurred:\n" + ex);
             }
         }
 
         private void SetError(string message)
         {
-            SD.Trace.WriteLine($"Setting error meesage: {message}");
+            SD.Trace.WriteLine($"Setting error message: {message}");
             this.passwordOptions.Visible = false;
             this.divWarning.Visible = true;
             this.lbWarning.Text = message;
             this.btReset.Enabled = false;
             this.btReset.Visible = false;
-            this.btStartAgain.Visible = true;
             this.resultRow.Visible = true;
             this.tableGeneratedPassword.Visible = false;
             this.divPasswordSetMessage.Visible = false;
@@ -422,7 +421,7 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
                         {
                             this.tableGeneratedPassword.Visible = false;
                             this.divPasswordSetMessage.Visible = true;
-                            this.lbPasswordSetMessage.Text = "The password was set successfully";
+                            this.lbPasswordSetMessage.Text = (string) GetLocalResourceObject("PasswordSetSucessfully");
                         }
                         else
                         {
@@ -438,12 +437,11 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
                 }
 
                 this.btReset.Visible = false;
-                this.btStartAgain.Visible = true;
                 this.up2.Update();
             }
             catch (Exception ex)
             {
-                SD.Trace.WriteLine($"Exception setting password for to {this.SidTarget.ToString()}\n {ex.ToString()}");
+                SD.Trace.WriteLine($"Exception setting password for {this.SidTarget}\n {ex}");
                 this.SetError($"{(string)this.GetLocalResourceObject("ErrorMessagePasswordSetFailure")} {ex}");
             }
             finally
@@ -483,15 +481,15 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
                 SD.Trace.WriteLine("Credentials did not validate");
                 this.divAuthNError.Visible = true;
                 this.lbAuthNError.Text = (string)this.GetLocalResourceObject("ErrorInvalidUsernameOrPassword");
-                this.lbAuthNPassword.Text = null;
-                this.lbAuthNUsername.Focus();
+                this.txAuthNPassword.Text = null;
+                this.txAuthNUsername.Focus();
                 this.ModalPopupExtender1.Show();
             }
         }
 
         protected void btCancel_OnClick(object sender, EventArgs e)
         {
-            this.lbAuthNPassword.Text = null;
+            this.txAuthNPassword.Text = null;
             this.divAuthNError.Visible = false;
             this.HasCredentials = false;
             this.ModalPopupExtender1.Hide();

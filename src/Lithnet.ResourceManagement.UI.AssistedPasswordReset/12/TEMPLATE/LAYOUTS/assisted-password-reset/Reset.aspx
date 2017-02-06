@@ -1,5 +1,4 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Reset.aspx.cs" Inherits="Lithnet.ResourceManagement.UI.AssistedPasswordReset.Reset" UICulture="auto" Culture="auto" %>
-
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <!DOCTYPE html>
@@ -7,7 +6,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title runat="server" id="pageTitle"></title>
+    <title runat="server" id="pageTitle">
+        <asp:Literal runat="server" Text="<%$Resources:PageTitle%>" />
+
+    </title>
     <link rel="stylesheet" href="styles.css" />
 </head>
 
@@ -22,7 +24,7 @@
                     <img src="lithnet16.png" alt="Lithnet" />
                 </div>
                 <h1>
-                    <asp:Label ID="lbHeader" runat="server" />
+                    <asp:Label ID="lbHeader" runat="server" Text="<%$Resources:PageTitle%>" />
                 </h1>
 
                 <div class="formcontent">
@@ -40,7 +42,7 @@
                                                 AutoPostBack="true"
                                                 runat="server"
                                                 Checked="true"
-                                                Text="Automatically generate password"
+                                                Text="<%$Resources:AutomaticallyGeneratePassword%>"
                                                 OnCheckedChanged="opSetMode_SelectedIndexChanged" />
                                         </td>
                                     </tr>
@@ -51,7 +53,7 @@
                                                 GroupName="passwordSetMode"
                                                 AutoPostBack="true"
                                                 runat="server"
-                                                Text="Specify a password"
+                                                Text="<%$Resources:SpecifyPassword%>"
                                                 OnCheckedChanged="opSetMode_SelectedIndexChanged" />
                                         </td>
                                     </tr>
@@ -60,7 +62,8 @@
                                 <asp:Panel ID="panelSpecifyPassword" runat="server" Visible="false">
                                     <table id="tableSpecifyPassword" class="credentialTable">
                                         <tr>
-                                            <th>New password</th>
+                                            <th>
+                                                <asp:Literal runat="server" Text="<%$Resources:NewPassword%>" /></th>
                                             <td>
                                                 <asp:TextBox ID="txNewPassword1" runat="server" TextMode="Password" CssClass="fullWidthControl" />
                                             </td>
@@ -73,25 +76,28 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th>Confirm password</th>
+                                            <th>
+                                                <asp:Literal runat="server" Text="<%$Resources:ConfirmPassword%>" /></th>
                                             <td>
                                                 <asp:TextBox ID="txNewPassword2" runat="server" TextMode="Password" CssClass="fullWidthControl" />
                                             </td>
                                             <td class="validationMessageCell">
-                                                <asp:RequiredFieldValidator ID="validatortxNewPassword2" runat="server"
+                                                <asp:RequiredFieldValidator ID="validatortxNewPassword2"
+                                                    runat="server"
                                                     ControlToValidate="txNewPassword2"
                                                     CssClass="ValidationError"
-                                                    ErrorMessage="Required"
+                                                    ErrorMessage="<%$Resources:Required%>"
                                                     Display="Dynamic" />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="3">
-                                                <asp:CompareValidator ID="txNewPasswordCompareValidator" runat="server"
+                                                <asp:CompareValidator ID="txNewPasswordCompareValidator"
+                                                    runat="server"
                                                     ControlToValidate="txNewPassword2"
                                                     CssClass="ValidationError"
                                                     ControlToCompare="txNewPassword1"
-                                                    ErrorMessage="The passwords do not match"
+                                                    ErrorMessage="<%$Resources:PasswordsDoNotMatch%>"
                                                     Display="Dynamic" />
                                             </td>
                                         </tr>
@@ -100,14 +106,14 @@
 
                                 <asp:CheckBox ID="ckUserMustChangePassword"
                                     runat="server"
-                                    Text="User must change password at next login" />
+                                    Text="<%$Resources:UserMustChangePassword%>" />
                             </asp:Panel>
 
                             <div id="resultRow" runat="server">
                                 <asp:Table runat="server" ID="tableGeneratedPassword" CssClass="dataTable">
                                     <asp:TableRow>
                                         <asp:TableHeaderCell>
-                                            <asp:Label runat="server" ID="lbNewPasswordCaption" />
+                                            <asp:Label runat="server" ID="lbNewPasswordCaption" Text="<%$Resources:NewPassword %>" />
                                         </asp:TableHeaderCell><asp:TableCell>
                                             <asp:Label ID="lbNewPassword" runat="server" CssClass="password" />
                                         </asp:TableCell>
@@ -123,10 +129,17 @@
                             </div>
 
                             <div class="buttonRow">
-
-                                <asp:Button ID="btStartAgain" runat="server" OnClientClick="ResetPage(); return false;" CssClass="button" Visible="false" Text="Start again" />
-                                <asp:Button ID="btReset" runat="server" OnClick="btReset_Click" CssClass="button" />
-
+                                <asp:Button ID="btReset"
+                                    runat="server"
+                                    OnClick="btReset_Click"
+                                    CssClass="button"
+                                    Text="<%$Resources:ResetPassword%>" />
+                                <asp:Button ID="btClose"
+                                    runat="server"
+                                    OnClientClick="ClosePage(); return false;"
+                                    CssClass="button"
+                                    Visible="true"
+                                    Text="<%$Resources:Close%>" />
                             </div>
 
                         </ContentTemplate>
@@ -149,33 +162,35 @@
                 <asp:Panel ID="popup" runat="server" DefaultButton="btAuthN" Style="display: none">
                     <div class="popupcontent">
                         <h1>
-                            <asp:Label ID="lbCredentialPromptHeader" runat="server" meta:resourcekey="lbCredentialPromptHeader" />
+                            <asp:Label ID="lbCredentialPromptHeader" runat="server" Text="<%$Resources:AuthNRequiredHeader%>" />
                         </h1>
                         <div class="formcontent">
                             <asp:LinkButton ID="hiddenplaceholder" runat="server" />
                             <asp:Table runat="server" CssClass="credentialTable">
                                 <asp:TableRow>
                                     <asp:TableHeaderCell>
-                                        <asp:Label ID="lbAuthNUsername" runat="server" meta:resourcekey="lbAuthNUsername" />
-                                    </asp:TableHeaderCell><asp:TableCell>
+                                      <asp:Literal runat="server" Text="<%$Resources:AuthNUsername%>" />
+                                    </asp:TableHeaderCell>
+                                    <asp:TableCell>
                                         <asp:TextBox ID="txAuthNUsername" runat="server" CssClass="fullWidthControl" />
                                     </asp:TableCell>
                                 </asp:TableRow>
                                 <asp:TableRow>
                                     <asp:TableHeaderCell>
-                                        <asp:Label ID="lbAuthNPassword" runat="server" meta:resourcekey="lbAuthNPassword" />
-                                    </asp:TableHeaderCell><asp:TableCell>
+                                        <asp:Literal runat="server" Text="<%$Resources:AuthNPassword%>" />
+                                    </asp:TableHeaderCell>
+                                    <asp:TableCell>
                                         <asp:TextBox ID="txAuthNPassword" TextMode="Password" runat="server" CssClass="fullWidthControl" />
                                     </asp:TableCell>
                                 </asp:TableRow>
                             </asp:Table>
                             <div id="divAuthNError" class="warning" runat="server">
-                                <asp:Label ID="lbAuthNError" runat="server" Text="error" />
+                                <asp:Label ID="lbAuthNError" runat="server"  />
                             </div>
 
                             <div class="buttonRow">
-                                <asp:Button ID="btAuthN" runat="server" OnClick="btAuthN_OnClick" meta:resourcekey="btAuthN" CssClass="button" />
-                                <asp:Button ID="btCancel" Text="Cancel" runat="server" OnClick="btCancel_OnClick" CssClass="button" />
+                                <asp:Button ID="btAuthN" runat="server" OnClick="btAuthN_OnClick" Text="<%$Resources:OK%>" CssClass="button" />
+                                <asp:Button ID="btCancel" Text="<%$Resources:Cancel%>" runat="server" OnClick="btCancel_OnClick" CssClass="button" />
                             </div>
                         </div>
                     </div>
@@ -188,50 +203,13 @@
     </form>
 
     <script>
-
-        window.onload = function () {
-            var inputs = document.getElementsByName("opSetMode");
-
-            if (inputs.length > 0) {
-                for (var i = 0; i < inputs.length; i++) {
-                    if (inputs[i].type == "radio") {
-                        inputs[i].onclick = function () {
-                            SetControlState(this);
-                        }
-
-                        SetControlState(inputs[i]);
-                    }
-                }
-            }
-        }
-
-        function SetControlState(control) {
-            if (control.value == "2" && control.checked) {
-                ShowControls();
-            }
-            else {
-                HideControls();
-            }
+        function ClosePage() {
+            open(location, '_self').close();
+            return false;
         }
 
         function ResetPage() {
             window.location.href = "<%=this.Request.RawUrl%>";
-        }
-
-        function HideControls() {
-            return;
-            document.getElementById("<%=this.panelSpecifyPassword.ClientID%>").style.display = "none";
-            document.getElementById("<%=this.validatortxNewPassword1.ClientID%>").enabled = false;
-            document.getElementById("<%=this.validatortxNewPassword2.ClientID%>").enabled = false;
-            document.getElementById("<%=this.txNewPasswordCompareValidator.ClientID%>").enabled = false;
-        }
-
-        function ShowControls() {
-            return;
-            document.getElementById("<%=this.panelSpecifyPassword.ClientID%>").style.display = "block";
-            document.getElementById("<%=this.validatortxNewPassword1.ClientID%>").enabled = true;
-            document.getElementById("<%=this.validatortxNewPassword2.ClientID%>").enabled = true;
-            document.getElementById("<%=this.txNewPasswordCompareValidator.ClientID%>").enabled = true;
         }
     </script>
 </body>

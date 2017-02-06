@@ -126,28 +126,25 @@
   <data name="ErrorUserNotFound" xml:space="preserve">
     <value>The user was not found</value>
   </data>
-  <data name="GeneratePasssword" xml:space="preserve">
+  <data name="ResetPassword" xml:space="preserve">
     <value>Reset password</value>
   </data>
   <data name="NewPassword" xml:space="preserve">
     <value>New password</value>
   </data>
-  <data name="GenerateNewPassword" xml:space="preserve">
-    <value>Reset password</value>
-  </data>
   <data name="PageTitle" xml:space="preserve">
     <value>Password reset</value>
   </data>
-  <data name="btAuthN.Text" xml:space="preserve">
+  <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>
-  <data name="lbAuthNPassword.Text" xml:space="preserve">
+  <data name="AuthNPassword" xml:space="preserve">
     <value>Password</value>
   </data>
-  <data name="lbAuthNUsername.Text" xml:space="preserve">
+  <data name="AuthNUsername" xml:space="preserve">
     <value>User name</value>
   </data>
-  <data name="lbCredentialPromptHeader.Text" xml:space="preserve">
+  <data name="AuthNRequiredHeader" xml:space="preserve">
     <value>Enter credentials</value>
   </data>
   <data name="ErrorMessageBlankPassword" xml:space="preserve">
@@ -158,5 +155,35 @@
   </data>
   <data name="ErrorInvalidUsernameOrPassword" xml:space="preserve">
     <value>Invalid username or password</value>
+  </data>
+  <data name="AutomaticallyGeneratePassword" xml:space="preserve">
+    <value>Automatically generate password</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="PasswordsDoNotMatch" xml:space="preserve">
+    <value>The passwords do not match</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>Required</value>
+  </data>
+  <data name="SIDNotFound" xml:space="preserve">
+    <value>The password cannot be reset because the Active Directory security ID for the user was not found</value>
+  </data>
+  <data name="SpecifyPassword" xml:space="preserve">
+    <value>Specify password</value>
+  </data>
+  <data name="UserMustChangePassword" xml:space="preserve">
+    <value>User must change password at next logon</value>
+  </data>
+  <data name="PasswordSetSucessfully" xml:space="preserve">
+    <value>The password was set successfully</value>
   </data>
 </root>
