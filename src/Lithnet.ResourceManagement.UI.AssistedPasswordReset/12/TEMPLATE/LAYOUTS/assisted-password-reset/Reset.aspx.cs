@@ -437,18 +437,19 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
                 }
 
                 this.btReset.Visible = false;
+                this.SpecifiedPassword = null;
                 this.up2.Update();
             }
             catch (Exception ex)
             {
                 SD.Trace.WriteLine($"Exception setting password for {this.SidTarget}\n {ex}");
                 this.SetError($"{(string)this.GetLocalResourceObject("ErrorMessagePasswordSetFailure")} {ex}");
+                this.SpecifiedPassword = null;
             }
             finally
             {
                 this.HasCredentials = false;
                 this.txAuthNPassword.Text = null;
-                this.SpecifiedPassword = null;
             }
         }
 
