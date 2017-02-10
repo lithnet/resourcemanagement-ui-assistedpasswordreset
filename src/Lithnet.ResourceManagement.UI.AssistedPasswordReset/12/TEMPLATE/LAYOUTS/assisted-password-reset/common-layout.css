@@ -126,3 +126,8 @@ input.button {
 .formcontent {
     margin: 20px;
 }
+
+.buttonRow {
+    text-align: center;
+    margin-top: 20px;
+}

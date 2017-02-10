@@ -71,11 +71,6 @@
             text-align: left;
         }
 
-.buttonRow {
-    text-align: center;
-    margin-top: 20px;
-}
-
 .ModalBackground {
     background-color: Gray;
     filter: alpha(opacity=50);
