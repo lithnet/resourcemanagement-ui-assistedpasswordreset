@@ -14,26 +14,6 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
 {
     public partial class Reset : System.Web.UI.Page
     {
-        private Dictionary<string, string> RowItems
-        {
-            get
-            {
-                Dictionary<string, string> items = this.ViewState["Items"] as Dictionary<string, string>;
-
-                if (items == null)
-                {
-                    items = new Dictionary<string, string>();
-                    this.ViewState["Items"] = items;
-                }
-
-                return items;
-            }
-            set
-            {
-                this.ViewState["Items"] = value;
-            }
-        }
-
         private string SidTarget
         {
             get
@@ -98,23 +78,15 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
                         return;
                     }
 
-
-                    //this.ReloadTableStructure();
                     return;
                 }
 
                 this.txAuthNUsername.Text = System.Threading.Thread.CurrentPrincipal.Identity.Name;
-                //this.pageTitle.Text = (string)this.GetLocalResourceObject("PageTitle");
-                //this.lbHeader.Text = (string)this.GetLocalResourceObject("PageTitle");
-                //this.btReset.Text = (string)this.GetLocalResourceObject("GenerateNewPassword");
                 this.ckUserMustChangePassword.Checked = AppConfigurationSection.CurrentConfig.ForcePasswordChangeAtNextLogon || AppConfigurationSection.CurrentConfig.PasswordChangeAtNextLogonSetAsDefault;
                 this.ckUserMustChangePassword.Enabled = !AppConfigurationSection.CurrentConfig.ForcePasswordChangeAtNextLogon;
                 this.opSetMode.Visible = AppConfigurationSection.CurrentConfig.AllowSpecifiedPasswords;
                 this.resultRow.Visible = false;
                 this.divWarning.Visible = false;
-                //this.tableGeneratedPassword.Visible = false;
-                //this.divPasswordSetMessage.Visible = false;
-                //this.lbNewPasswordCaption.Text = (string)this.GetLocalResourceObject("NewPassword");
 
                 ResourceManagementClient c = new ResourceManagementClient();
                 List<string> attributeList = new List<string>();
@@ -174,11 +146,24 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
         {
             foreach (string attributeName in AppConfigurationSection.CurrentConfig.DisplayAttributeList)
             {
-                this.AddRowToTable(LocalizationHelper.GetLocalizedName(attributeName, this.ObjectType), o.Attributes[attributeName].StringValue, true);
+                string value;
+
+                AttributeValue attribute = o.Attributes[attributeName];
+
+                if (attribute.IsNull)
+                {
+                    value = null;
+                }
+                else
+                {
+                    value = string.Join("<br/>", attribute.ValuesAsString);
+                }
+
+                this.AddRowToTable(LocalizationHelper.GetLocalizedName(attributeName, this.ObjectType), value);
             }
         }
 
-        private void AddRowToTable(string header, string value, bool persist)
+        private void AddRowToTable(string header, string value)
         {
             int rowCount = this.attributeTable.Rows.Count;
 
@@ -204,46 +189,9 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
 
             this.attributeTable.Rows.Add(row);
 
-            if (persist)
-            {
-                this.RowItems.Add(header, value);
-            }
-
             SD.Trace.WriteLine($"Row {rowCount} added");
         }
 
-        private void ReloadTableStructure()
-        {
-            if (!this.IsPostBack)
-            {
-                return;
-            }
-
-            SD.Trace.WriteLine($"Reloading table structure");
-
-            foreach (KeyValuePair<string, string> kvp in this.RowItems)
-            {
-                int i = this.attributeTable.Rows.Count;
-
-                TableRow row = new TableRow { ID = $"row{i}" };
-
-                row.Cells.Add(new TableHeaderCell
-                {
-                    ID = $"th{i}",
-                    Text = kvp.Key
-                });
-
-                row.Cells.Add(new TableCell
-                {
-                    ID = $"tc{i}",
-                    Text = kvp.Value
-                });
-
-                this.attributeTable.Rows.Add(row);
-
-                SD.Trace.WriteLine($"Row {i} re-added");
-            }
-        }
 
         private PrincipalContext GetPrincipalContext(bool forcePrompt)
         {
