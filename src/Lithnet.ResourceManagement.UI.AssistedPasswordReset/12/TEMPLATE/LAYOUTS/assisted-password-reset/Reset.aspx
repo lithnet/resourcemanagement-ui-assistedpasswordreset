@@ -11,6 +11,7 @@
 
     </title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="common-layout.css" />
 </head>
 
 <body>
@@ -18,9 +19,9 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server" />
 
 
-        <div class="contentmain">
+        <div class="main">
             <div class="wrapper">
-                <div id="header">
+                <div id="header" class="lithnet-header" >
                     <img src="lithnet16.png" alt="Lithnet" />
                 </div>
                 <h1>

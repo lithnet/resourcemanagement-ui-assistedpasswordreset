@@ -1,0 +1,128 @@
+﻿.main {
+    display: block;
+}
+
+    .main .wrapper {
+        position: relative;
+        margin: 0 auto;
+        width: 65%;
+        max-width: 800px;
+        background-color: #fff;
+        border: solid 2px #444;
+        border-radius: 10px;
+    }
+
+html {
+    background-color: #aaa;
+}
+
+body {
+    font-family: "Segoe UI","Helvetica","Verdana", "Arial", "Sans-Serif";
+    font-size: 14px;
+    overflow: auto;
+}
+
+form {
+    margin: 10px;
+}
+
+h1 {
+    font-size: 22px;
+    text-align: center;
+    color: #333;
+}
+
+.warning {
+    text-align: left;
+    color: red;
+    margin: 10px;
+    padding: 7px 7px 7px 30px;
+    background-image: url('icon_alert.gif');
+    background-repeat: no-repeat;
+    background-position: left center;
+    word-wrap: break-word;
+}
+
+    .warning:empty {
+        display: none;
+    }
+
+
+input.button {
+    color: #444;
+    text-decoration: none;
+    padding: 7px 12px;
+    position: relative;
+    display: inline-block;
+    text-shadow: 0 1px 0 #fff;
+    -webkit-transition: border-color .218s;
+    -moz-transition: border .218s;
+    -o-transition: border-color .218s;
+    transition: border-color .218s;
+    background: #f3f3f3;
+    border: solid 1px #444;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+    input.button:hover:enabled {
+        -moz-box-shadow: 0 1px 2px #777;
+        -webkit-box-shadow: 0 1px 2px #777;
+        box-shadow: 0 1px 2px #777;
+    }
+
+    input.button:disabled {
+        color: #dcdcdc;
+        background: #f3f3f3;
+        border: solid 1px #dcdcdc;
+    }
+
+.fullWidthControl {
+    width: 100%;
+}
+
+
+.lithnet-header {
+    position: relative;
+    right: 0;
+    top: 0;
+    display: block;
+    margin: 0;
+    padding: 5px;
+    text-align: right;
+    float: right;
+}
+
+.dataTable {
+    margin: 10px 0 0 0;
+    border-top: 1px solid #e5eff8;
+    border-right: 1px solid #e5eff8;
+    border-collapse: collapse;
+    border-style: hidden;
+    table-layout: fixed;
+    width: 100%;
+}
+
+    .dataTable th {
+        padding: 10px;
+        text-align: right;
+        font-weight: 600;
+        color: #678197;
+        border-bottom: 1px solid #e5eff8;
+        border-left: 1px solid #e5eff8;
+        width: 35%;
+    }
+
+    .dataTable td {
+        padding: 10px;
+        text-align: left;
+        color: #678197;
+        border-bottom: 1px solid #e5eff8;
+        word-wrap: break-word;
+        width: 65%;
+    }
+
+.formcontent {
+    margin: 20px;
+}
