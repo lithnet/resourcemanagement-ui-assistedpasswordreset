@@ -5,16 +5,16 @@ The Lithnet Assisted Password Reset (APR) module is an extension to the FIM/MIM 
 ![](https://github.com/lithnet/resourcemanagement-ui-assistedpasswordreset/wiki/images/screen-shot1.png)
 
 ## Features
-1. Creates randomly generated password of configurable length, or
+1. Can create randomly generated passwords of a configurable length, or
 2. Allows password to be specified by the operator
-3. Force user to change password at next login
-4. Optionally require operator to re-authenticate to reset password
+3. Includes the ability to force the user to change their password at the next login
+4. Optionally, can require operator to re-authenticate to reset a user's password
 
 ## Getting started
 The module is a simple WSP package that needs to be deployed into your SharePoint farm. The [installation guide](https://github.com/lithnet/resourcemanagement-ui-assistedpasswordreset/wiki/Installation-and-upgrade-steps) covers all the steps for installing and upgrading the module
 
 ## Localization
-The module will match the locale of the FIM portal, rendering attribute display names in the browser's preferred language. The module itself has been localized into the following languages
+The module will match the locale of the MIM portal, rendering attribute display names in the browser's preferred language. The module itself has been localized into the following languages
 - Italian
 
 If you want to contribute a translation, see the "How can I contribute" section below.
