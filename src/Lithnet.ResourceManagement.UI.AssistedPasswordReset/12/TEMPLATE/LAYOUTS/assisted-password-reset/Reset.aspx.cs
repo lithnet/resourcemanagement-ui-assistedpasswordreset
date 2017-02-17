@@ -9,6 +9,7 @@ using System.Web.UI.WebControls;
 using Lithnet.ResourceManagement.Client;
 using SD = System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 
 namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
 {
@@ -140,6 +141,7 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
             this.resultRow.Visible = true;
             this.tableGeneratedPassword.Visible = false;
             this.divPasswordSetMessage.Visible = false;
+            this.up2.Update();
         }
 
         private void BuildAttributeTable(ResourceObject o)
@@ -387,6 +389,21 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
                 this.btReset.Visible = false;
                 this.SpecifiedPassword = null;
                 this.up2.Update();
+            }
+            catch (TargetInvocationException ex)
+            {
+                SD.Trace.WriteLine($"Exception setting password for {this.SidTarget}\n {ex}");
+
+                if (ex.InnerException?.GetType() == typeof(UnauthorizedAccessException))
+                {
+                    this.SetError((string) this.GetLocalResourceObject("AccessDenied"));
+                }
+                else
+                {
+                    this.SetError($"{(string) this.GetLocalResourceObject("ErrorMessagePasswordSetFailure")} {ex}");
+                }
+
+                this.SpecifiedPassword = null;
             }
             catch (Exception ex)
             {

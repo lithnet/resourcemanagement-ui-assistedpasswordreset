@@ -186,4 +186,7 @@
   <data name="PasswordSetSucessfully" xml:space="preserve">
     <value>The password was set successfully</value>
   </data>
+  <data name="AccessDenied" xml:space="preserve">
+    <value>Access denied</value>
+  </data>
 </root>
