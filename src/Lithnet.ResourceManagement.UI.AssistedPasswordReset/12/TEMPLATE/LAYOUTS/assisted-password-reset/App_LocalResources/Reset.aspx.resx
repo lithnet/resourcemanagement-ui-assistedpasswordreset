@@ -189,4 +189,7 @@
   <data name="AccessDenied" xml:space="preserve">
     <value>Access denied</value>
   </data>
+  <data name="UnlockAccount" xml:space="preserve">
+    <value>Unlock account</value>
+  </data>
 </root>

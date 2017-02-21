@@ -175,6 +175,32 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
             }
         }
 
+        [ConfigurationProperty("showUnlockAccount", IsRequired = false, DefaultValue = true)]
+        public bool ShowUnlockAccount
+        {
+            get
+            {
+                return (bool)this["showUnlockAccount"];
+            }
+            set
+            {
+                this["showUnlockAccount"] = value;
+            }
+        }
+
+        [ConfigurationProperty("unlockAccountSetAsDefault", IsRequired = false, DefaultValue = true)]
+        public bool UnlockAccountSetAsDefault
+        {
+            get
+            {
+                return (bool)this["unlockAccountSetAsDefault"];
+            }
+            set
+            {
+                this["unlockAccountSetAsDefault"] = value;
+            }
+        }
+
         [ConfigurationProperty("allowedPasswordCharacters", IsRequired = false, DefaultValue = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz0123456789@#()*&$!")]
         public string AllowedPasswordCharacters
         {

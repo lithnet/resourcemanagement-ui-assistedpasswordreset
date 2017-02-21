@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Reset.aspx.cs" Inherits="Lithnet.ResourceManagement.UI.AssistedPasswordReset.Reset" UICulture="auto" Culture="auto" %>
+
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <!DOCTYPE html>
@@ -18,7 +19,7 @@
 
         <div class="main">
             <div class="wrapper">
-                <div id="header" class="lithnet-header" >
+                <div id="header" class="lithnet-header">
                     <img src="lithnet16.png" alt="Lithnet" />
                 </div>
                 <h1>
@@ -102,9 +103,16 @@
                                     </table>
                                 </asp:Panel>
 
-                                <asp:CheckBox ID="ckUserMustChangePassword"
-                                    runat="server"
-                                    Text="<%$Resources:UserMustChangePassword%>" />
+                                <div>
+                                    <asp:CheckBox ID="ckUserMustChangePassword"
+                                        runat="server"
+                                        Text="<%$Resources:UserMustChangePassword%>" CssClass="stackedControl" />
+
+                                    <asp:CheckBox ID="ckUnlockAccount"
+                                        runat="server"
+                                        Text="<%$Resources:UnlockAccount%>" CssClass="stackedControl" />
+
+                                </div>
                             </asp:Panel>
 
                             <div id="resultRow" runat="server">
@@ -183,7 +191,7 @@
                                 </asp:TableRow>
                             </asp:Table>
                             <div id="divAuthNError" class="warning" runat="server">
-                                <asp:Label ID="lbAuthNError" runat="server"  />
+                                <asp:Label ID="lbAuthNError" runat="server" />
                             </div>
 
                             <div class="buttonRow">

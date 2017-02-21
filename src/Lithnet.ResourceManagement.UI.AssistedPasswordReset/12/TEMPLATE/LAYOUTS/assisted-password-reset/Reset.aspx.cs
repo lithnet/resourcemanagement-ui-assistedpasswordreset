@@ -73,18 +73,16 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
 
                 if (this.Page.IsPostBack)
                 {
-
-                    if (!System.Web.UI.ScriptManager.GetCurrent(this.Page).IsInAsyncPostBack)
-                    {
-                        return;
-                    }
-
                     return;
                 }
 
                 this.txAuthNUsername.Text = System.Threading.Thread.CurrentPrincipal.Identity.Name;
                 this.ckUserMustChangePassword.Checked = AppConfigurationSection.CurrentConfig.ForcePasswordChangeAtNextLogon || AppConfigurationSection.CurrentConfig.PasswordChangeAtNextLogonSetAsDefault;
                 this.ckUserMustChangePassword.Enabled = !AppConfigurationSection.CurrentConfig.ForcePasswordChangeAtNextLogon;
+
+                this.ckUnlockAccount.Visible = AppConfigurationSection.CurrentConfig.ShowUnlockAccount;
+                this.ckUnlockAccount.Checked = AppConfigurationSection.CurrentConfig.ShowUnlockAccount && AppConfigurationSection.CurrentConfig.UnlockAccountSetAsDefault;
+
                 this.opSetMode.Visible = AppConfigurationSection.CurrentConfig.AllowSpecifiedPasswords;
                 this.resultRow.Visible = false;
                 this.divWarning.Visible = false;
@@ -365,13 +363,19 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
                             SD.Trace.WriteLine($"Password set to require change on next login");
                         }
 
+                        if (this.ckUnlockAccount.Checked)
+                        {
+                            user.UnlockAccount();
+                            SD.Trace.WriteLine($"Unlocked account");
+                        }
+
                         this.resultRow.Visible = true;
 
                         if (this.opPasswordSpecify.Checked)
                         {
                             this.tableGeneratedPassword.Visible = false;
                             this.divPasswordSetMessage.Visible = true;
-                            this.lbPasswordSetMessage.Text = (string) GetLocalResourceObject("PasswordSetSucessfully");
+                            this.lbPasswordSetMessage.Text = (string)GetLocalResourceObject("PasswordSetSucessfully");
                         }
                         else
                         {
@@ -396,11 +400,11 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
 
                 if (ex.InnerException?.GetType() == typeof(UnauthorizedAccessException))
                 {
-                    this.SetError((string) this.GetLocalResourceObject("AccessDenied"));
+                    this.SetError((string)this.GetLocalResourceObject("AccessDenied"));
                 }
                 else
                 {
-                    this.SetError($"{(string) this.GetLocalResourceObject("ErrorMessagePasswordSetFailure")} {ex}");
+                    this.SetError($"{(string)this.GetLocalResourceObject("ErrorMessagePasswordSetFailure")} {ex}");
                 }
 
                 this.SpecifiedPassword = null;

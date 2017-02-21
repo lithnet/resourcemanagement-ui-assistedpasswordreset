@@ -166,6 +166,15 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset {
         protected global::System.Web.UI.WebControls.CheckBox ckUserMustChangePassword;
         
         /// <summary>
+        /// ckUnlockAccount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox ckUnlockAccount;
+        
+        /// <summary>
         /// resultRow control.
         /// </summary>
         /// <remarks>
