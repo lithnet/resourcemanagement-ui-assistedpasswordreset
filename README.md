@@ -14,8 +14,7 @@ The Lithnet Assisted Password Reset (APR) module is an extension to the FIM/MIM 
 The module is a simple WSP package that needs to be deployed into your SharePoint farm. The [installation guide](https://github.com/lithnet/resourcemanagement-ui-assistedpasswordreset/wiki/Installation-and-upgrade-steps) covers all the steps for installing and upgrading the module
 
 ## Localization
-The module will match the locale of the MIM portal, rendering attribute display names in the browser's preferred language. The module itself has been localized into the following languages
-- Italian
+The module will match the locale of the MIM portal, rendering attribute display names in the browser's preferred language. The module itself can be localized into any language with a provided translation.
 
 If you want to contribute a translation, see the "How can I contribute" section below.
 
@@ -27,7 +26,7 @@ Want to fix an issue?
 * Fork the project and submit a pull request 
 
 Want to contribute a translation?
-* Fill in the [localization survey](https://lithnet-my.sharepoint.com/personal/ryan_lithiumblue_com/_layouts/15/guestaccess.aspx?guestaccesstoken=QMmZhOa00BEb1QJnSnIlPvHFB4DSTBZWxh5UZAVp9aw%3d&docid=1_1fb5451aedc1842b88e2daeb1077b0ac8&wdFormId=%7B59C5F77D%2DCDEA%2D4703%2DBA86%2D81352BC45ED4%7D) and raise a [new issue](https://github.com/lithnet/resourcemanagement-ui-assistedpasswordreset/issues/new) requesting your language be added.
+* Fill in the [localization survey](https://lithnet-my.sharepoint.com/personal/ryan_lithiumblue_com/_layouts/15/guestaccess.aspx?guestaccesstoken=T3kwQ4cXxG9LpoAcHWn%2fM4UpONnU%2fC73UvcSEIj7XwE%3d&docid=1_1ca961b481f6440dcb3d4154674319d44&wdFormId=%7B8C46C778%2D4238%2D43FE%2D8D3A%2DC2994C25FC21%7D) and raise a [new issue](https://github.com/lithnet/resourcemanagement-ui-assistedpasswordreset/issues/new) requesting your language be added.
 
 ## Keep up to date
 * [Visit my blog](http://blog.lithiumblue.com)
