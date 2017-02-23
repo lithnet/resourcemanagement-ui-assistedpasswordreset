@@ -121,13 +121,10 @@
     <value>No SID target available</value>
   </data>
   <data name="ErrorMessagePasswordSetFailure" xml:space="preserve">
-    <value>An error occured setting the password</value>
+    <value>An error occurred setting the password</value>
   </data>
   <data name="ErrorUserNotFound" xml:space="preserve">
     <value>The user was not found</value>
-  </data>
-  <data name="ResetPassword" xml:space="preserve">
-    <value>Reset password</value>
   </data>
   <data name="NewPassword" xml:space="preserve">
     <value>New password</value>
@@ -165,17 +162,11 @@
   <data name="Close" xml:space="preserve">
     <value>Close</value>
   </data>
-  <data name="ConfirmPassword" xml:space="preserve">
+  <data name="NewPasswordConfirm" xml:space="preserve">
     <value>Confirm password</value>
-  </data>
-  <data name="PasswordsDoNotMatch" xml:space="preserve">
-    <value>The passwords do not match</value>
   </data>
   <data name="Required" xml:space="preserve">
     <value>Required</value>
-  </data>
-  <data name="SIDNotFound" xml:space="preserve">
-    <value>The password cannot be reset because the Active Directory security ID for the user was not found</value>
   </data>
   <data name="SpecifyPassword" xml:space="preserve">
     <value>Specify password</value>
@@ -191,5 +182,8 @@
   </data>
   <data name="UnlockAccount" xml:space="preserve">
     <value>Unlock account</value>
+  </data>
+  <data name="ResetPassword" xml:space="preserve">
+    <value>Reset password</value>
   </data>
 </root>

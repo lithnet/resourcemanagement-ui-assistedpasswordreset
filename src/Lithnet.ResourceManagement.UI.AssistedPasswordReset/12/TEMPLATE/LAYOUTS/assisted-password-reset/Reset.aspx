@@ -76,7 +76,7 @@
                                         </tr>
                                         <tr>
                                             <th>
-                                                <asp:Literal runat="server" Text="<%$Resources:ConfirmPassword%>" /></th>
+                                                <asp:Literal runat="server" Text="<%$Resources:NewPasswordConfirm%>" /></th>
                                             <td>
                                                 <asp:TextBox ID="txNewPassword2" runat="server" TextMode="Password" CssClass="fullWidthControl" />
                                             </td>
@@ -96,7 +96,7 @@
                                                     ControlToValidate="txNewPassword2"
                                                     CssClass="ValidationError"
                                                     ControlToCompare="txNewPassword1"
-                                                    ErrorMessage="<%$Resources:PasswordsDoNotMatch%>"
+                                                    ErrorMessage="<%$Resources:ErrorMessagePasswordsDoNotMatch%>"
                                                     Display="Dynamic" />
                                             </td>
                                         </tr>

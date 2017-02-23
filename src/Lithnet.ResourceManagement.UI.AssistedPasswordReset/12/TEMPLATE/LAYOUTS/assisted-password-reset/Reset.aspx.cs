@@ -113,7 +113,8 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
 
                 if (o.Attributes[AppConfigurationSection.CurrentConfig.ObjectSidAttributeName].IsNull)
                 {
-                    this.SetError((string)this.GetLocalResourceObject("SIDNotFound"));
+                    SD.Trace.WriteLine($"No SID found on the user object");
+                    this.SetError((string)this.GetLocalResourceObject("ErrorUserNotFound"));
                 }
                 else
                 {
