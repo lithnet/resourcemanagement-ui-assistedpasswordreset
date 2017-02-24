@@ -354,6 +354,12 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
 
                     using (user)
                     {
+                        if (this.ckUnlockAccount.Checked)
+                        {
+                            user.UnlockAccount();
+                            SD.Trace.WriteLine($"Unlocked account");
+                        }
+
                         SD.Trace.WriteLine($"Attempting to set password");
                         user.SetPassword(password);
                         SD.Trace.WriteLine($"Password set");
@@ -362,12 +368,6 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
                         {
                             user.ExpirePasswordNow();
                             SD.Trace.WriteLine($"Password set to require change on next login");
-                        }
-
-                        if (this.ckUnlockAccount.Checked)
-                        {
-                            user.UnlockAccount();
-                            SD.Trace.WriteLine($"Unlocked account");
                         }
 
                         this.resultRow.Visible = true;
