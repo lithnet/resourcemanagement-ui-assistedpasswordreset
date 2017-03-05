@@ -1,5 +1,5 @@
 ![](https://lithnet.github.io/images/logo-ex-small.png)
-# Assisted pasword reset module for FIM 2010/MIM 2016
+# Assisted password reset module for FIM 2010/MIM 2016
 The Lithnet Assisted Password Reset (APR) module is an extension to the FIM/MIM portal that provides the ability for your help desk staff to reset a user's password directly from the MIM portal.
 
 ![](https://github.com/lithnet/resourcemanagement-ui-assistedpasswordreset/wiki/images/screen-shot1.png)
