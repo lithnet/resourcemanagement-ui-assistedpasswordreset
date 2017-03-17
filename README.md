@@ -1,5 +1,5 @@
 ![](https://lithnet.github.io/images/logo-ex-small.png)
-# Assisted pasword reset module for FIM 2010/MIM 2016
+# Assisted password reset module for FIM 2010/MIM 2016
 The Lithnet Assisted Password Reset (APR) module is an extension to the FIM/MIM portal that provides the ability for your help desk staff to reset a user's password directly from the MIM portal.
 
 ![](https://github.com/lithnet/resourcemanagement-ui-assistedpasswordreset/wiki/images/screen-shot1.png)
@@ -12,6 +12,7 @@ The Lithnet Assisted Password Reset (APR) module is an extension to the FIM/MIM 
 5. Customize the list of attributes shown on the page
 6. Supports localized attribute names from the FIM/MIM service
 7. Integrates with the user RCDC using a UocHyperLink control
+8. Resets passwords directly against the AD, utilizing existing permission delegation
 
 ## Getting started
 The module is a simple WSP package that needs to be deployed into your SharePoint farm. The [installation guide](https://github.com/lithnet/resourcemanagement-ui-assistedpasswordreset/wiki/Installation-and-upgrade-steps) covers all the steps for installing and upgrading the module
