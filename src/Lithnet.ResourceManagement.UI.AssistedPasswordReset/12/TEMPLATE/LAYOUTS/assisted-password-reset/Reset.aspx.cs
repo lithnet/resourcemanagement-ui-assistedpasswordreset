@@ -444,7 +444,7 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
 
             ManagementScope scope = new ManagementScope($"\\\\{machineName}\\root\\MicrosoftIdentityIntegrationServer", op);
 
-            string queryString = $"SELECT * FROM MIIS_CSObject WHERE (Domain='{this.UserDomain}' AND Account='{this.UserName}')";
+            string queryString = $"SELECT * FROM MIIS_CSObject WHERE (Domain='{this.UserDomain.Replace("'", @"\'")}' AND Account='{this.UserName.Replace("'", @"\'")}')";
             SD.Trace.WriteLine($"WMI query: {queryString}");
 
             ObjectQuery query = new ObjectQuery(queryString);
