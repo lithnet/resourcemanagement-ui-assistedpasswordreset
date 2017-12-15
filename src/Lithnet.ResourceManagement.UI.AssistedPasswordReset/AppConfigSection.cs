@@ -38,62 +38,67 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
         [ConfigurationProperty("objectSidAttributeName", IsRequired = false, DefaultValue = "ObjectSID")]
         public string ObjectSidAttributeName
         {
-            get
-            {
-                return (string) this["objectSidAttributeName"];
-            }
-            set
-            {
-                this["objectSidAttributeName"] = value;
-            }
+            get => (string) this["objectSidAttributeName"];
+            set => this["objectSidAttributeName"] = value;
+        }
+
+        [ConfigurationProperty("domainAttributeName", IsRequired = false, DefaultValue = "Domain")]
+        public string DomainAttributeName
+        {
+            get => (string)this["domainAttributeName"];
+            set => this["domainAttributeName"] = value;
+        }
+
+        [ConfigurationProperty("accountNameAttributeName", IsRequired = false, DefaultValue = "AccountName")]
+        public string AccountNameAttributeName
+        {
+            get => (string)this["accountNameAttributeName"];
+            set => this["accountNameAttributeName"] = value;
+        }
+
+        [ConfigurationProperty("domainController", IsRequired = false, DefaultValue = null)]
+        public string DomainController
+        {
+            get => (string)this["domainController"];
+            set => this["domainController"] = value;
+        }
+
+        [ConfigurationProperty("syncServer", IsRequired = false, DefaultValue = null)]
+        public string SyncServer
+        {
+            get => (string)this["syncServer"];
+            set => this["syncServer"] = value;
+        }
+
+        [ConfigurationProperty("useSyncServerWmi", IsRequired = false, DefaultValue = true)]
+        public bool UseWmi
+        {
+            get => (bool)this["useSyncServerWmi"];
+            set => this["useSyncServerWmi"] = value;
         }
 
         [ConfigurationProperty("searchAttributeName", IsRequired = false, DefaultValue = "ObjectID")]
         public string SearchAttributeName
         {
-            get
-            {
-                return (string)this["searchAttributeName"];
-            }
-            set
-            {
-                this["searchAttributeName"] = value;
-            }
+            get => (string)this["searchAttributeName"];
+            set => this["searchAttributeName"] = value;
         }
 
         [ConfigurationProperty("displayAttributes", IsRequired = false, DefaultValue = "DisplayName,AccountName,Domain")]
         public string DisplayAttributes
         {
-            get
-            {
-                return (string)this["displayAttributes"];
-            }
-            set
-            {
-                this["displayAttributes"] = value;
-            }
+            get => (string)this["displayAttributes"];
+            set => this["displayAttributes"] = value;
         }
 
         [ConfigurationProperty("showNullAttributes", IsRequired = false, DefaultValue = false)]
         public bool ShowNullAttributes
         {
-            get
-            {
-                return (bool)this["showNullAttributes"];
-            }
-            set
-            {
-                this["showNullAttributes"] = value;
-            }
+            get => (bool)this["showNullAttributes"];
+            set => this["showNullAttributes"] = value;
         }
 
-        internal string[] DisplayAttributeList
-        {
-            get
-            {
-                return this.DisplayAttributes.Split(',');
-            }
-        }
+        internal string[] DisplayAttributeList => this.DisplayAttributes.Split(',');
 
         [ConfigurationProperty("generatedPasswordLength", IsRequired = false, DefaultValue = 8)]
         public int GeneratedPasswordLength
@@ -104,114 +109,63 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
 
                 return value > 0 ? value : 8;
             }
-            set
-            {
-                this["generatedPasswordLength"] = value;
-            }
+            set => this["generatedPasswordLength"] = value;
         }
 
         [ConfigurationProperty("alwaysPromptForAdminPassword", IsRequired = false, DefaultValue = false)]
         public bool AlwaysPromptForAdminPassword
         {
-            get
-            {
-                return (bool)this["alwaysPromptForAdminPassword"];
-            }
-            set
-            {
-                this["alwaysPromptForAdminPassword"] = value;
-            }
+            get => (bool)this["alwaysPromptForAdminPassword"];
+            set => this["alwaysPromptForAdminPassword"] = value;
         }
 
         [ConfigurationProperty("allowPasswordPromptFallback", IsRequired = false, DefaultValue = true)]
         public bool AllowPasswordPromptFallback
         {
-            get
-            {
-                return (bool)this["allowPasswordPromptFallback"];
-            }
-            set
-            {
-                this["allowPasswordPromptFallback"] = value;
-            }
+            get => (bool)this["allowPasswordPromptFallback"];
+            set => this["allowPasswordPromptFallback"] = value;
         }
 
         [ConfigurationProperty("forcePasswordChangeAtNextLogon", IsRequired = false, DefaultValue = false)]
         public bool ForcePasswordChangeAtNextLogon
         {
-            get
-            {
-                return (bool)this["forcePasswordChangeAtNextLogon"];
-            }
-            set
-            {
-                this["forcePasswordChangeAtNextLogon"] = value;
-            }
+            get => (bool)this["forcePasswordChangeAtNextLogon"];
+            set => this["forcePasswordChangeAtNextLogon"] = value;
         }
 
         [ConfigurationProperty("passwordChangeAtNextLogonSetAsDefault", IsRequired = false, DefaultValue = true)]
         public bool PasswordChangeAtNextLogonSetAsDefault
         {
-            get
-            {
-                return (bool)this["passwordChangeAtNextLogonSetAsDefault"];
-            }
-            set
-            {
-                this["passwordChangeAtNextLogonSetAsDefault"] = value;
-            }
+            get => (bool)this["passwordChangeAtNextLogonSetAsDefault"];
+            set => this["passwordChangeAtNextLogonSetAsDefault"] = value;
         }
 
         [ConfigurationProperty("allowSpecifiedPasswords", IsRequired = false, DefaultValue = true)]
         public bool AllowSpecifiedPasswords
         {
-            get
-            {
-                return (bool)this["allowSpecifiedPasswords"];
-            }
-            set
-            {
-                this["allowSpecifiedPasswords"] = value;
-            }
+            get => (bool)this["allowSpecifiedPasswords"];
+            set => this["allowSpecifiedPasswords"] = value;
         }
 
         [ConfigurationProperty("showUnlockAccount", IsRequired = false, DefaultValue = true)]
         public bool ShowUnlockAccount
         {
-            get
-            {
-                return (bool)this["showUnlockAccount"];
-            }
-            set
-            {
-                this["showUnlockAccount"] = value;
-            }
+            get => (bool)this["showUnlockAccount"];
+            set => this["showUnlockAccount"] = value;
         }
 
         [ConfigurationProperty("unlockAccountSetAsDefault", IsRequired = false, DefaultValue = true)]
         public bool UnlockAccountSetAsDefault
         {
-            get
-            {
-                return (bool)this["unlockAccountSetAsDefault"];
-            }
-            set
-            {
-                this["unlockAccountSetAsDefault"] = value;
-            }
+            get => (bool)this["unlockAccountSetAsDefault"];
+            set => this["unlockAccountSetAsDefault"] = value;
         }
 
         [ConfigurationProperty("allowedPasswordCharacters", IsRequired = false, DefaultValue = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz0123456789@#()*&$!")]
         public string AllowedPasswordCharacters
         {
-            get
-            {
-                return (string)this["allowedPasswordCharacters"];
-            }
-            set
-            {
-                this["allowedPasswordCharacters"] = value;
-            }
+            get => (string)this["allowedPasswordCharacters"];
+            set => this["allowedPasswordCharacters"] = value;
         }
 
         public char[] AllowedPasswordCharacterArray
