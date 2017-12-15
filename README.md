@@ -14,6 +14,11 @@ The Lithnet Assisted Password Reset (APR) module is an extension to the FIM/MIM 
 7. Integrates with the user RCDC using a UocHyperLink control
 8. Resets passwords directly against the AD, utilizing existing permission delegation
 
+## Requirements
+* SharePoint 2013 or later
+* FIM 2010 R2 or later
+* .NET Framework 4.0 or later
+
 ## Getting started
 The module is a simple WSP package that needs to be deployed into your SharePoint farm. The [installation guide](https://github.com/lithnet/resourcemanagement-ui-assistedpasswordreset/wiki/Installation-and-upgrade-steps) covers all the steps for installing and upgrading the module
 
