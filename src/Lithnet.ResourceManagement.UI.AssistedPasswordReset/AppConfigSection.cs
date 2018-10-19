@@ -59,7 +59,7 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
         [ConfigurationProperty("domainController", IsRequired = false, DefaultValue = null)]
         public string DomainController
         {
-            get => (string)this["domainController"];
+            get => string.IsNullOrWhiteSpace((string)this["domainController"]) ? null : (string)this["domainController"];
             set => this["domainController"] = value;
         }
 
@@ -70,7 +70,7 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
             set => this["syncServer"] = value;
         }
 
-        [ConfigurationProperty("useSyncServerWmi", IsRequired = false, DefaultValue = true)]
+        [ConfigurationProperty("useSyncServerWmi", IsRequired = false, DefaultValue = false)]
         public bool UseWmi
         {
             get => (bool)this["useSyncServerWmi"];
