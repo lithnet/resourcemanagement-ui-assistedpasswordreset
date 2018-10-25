@@ -7,7 +7,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title runat="server" id="pageTitle"><asp:Literal runat="server" Text="<%$Resources:PageTitle%>"></asp:Literal></title>
+    <title runat="server" id="pageTitle">
+        <asp:Literal runat="server" Text="<%$Resources:PageTitle%>"></asp:Literal></title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="common-layout.css" />
 </head>

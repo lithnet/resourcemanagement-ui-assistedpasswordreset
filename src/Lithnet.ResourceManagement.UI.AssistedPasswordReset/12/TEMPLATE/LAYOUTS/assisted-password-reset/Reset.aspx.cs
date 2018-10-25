@@ -552,6 +552,7 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
                 SD.Trace.WriteLine($"Exception setting password for {this.SidTarget}{this.Fqdn}\n {ex}");
 
                 this.SetError((string)this.GetLocalResourceObject("AccessDenied"));
+                this.SpecifiedPassword = null;
             }
             catch (TargetInvocationException ex)
             {
@@ -565,22 +566,24 @@ namespace Lithnet.ResourceManagement.UI.AssistedPasswordReset
                 {
                     this.SetError($"{(string)this.GetLocalResourceObject("ErrorMessagePasswordSetFailure")} {ex}");
                 }
+                this.SpecifiedPassword = null;
             }
             catch (ResourceNotFoundException ex)
             {
                 SD.Trace.WriteLine($"User not found: {this.SidTarget}{this.Fqdn}\n {ex}");
+                this.SpecifiedPassword = null;
                 this.SetError((string)this.GetLocalResourceObject("ErrorUserNotFound"));
             }
             catch (Exception ex)
             {
                 SD.Trace.WriteLine($"Exception setting password for {this.SidTarget}{this.Fqdn}\n {ex}");
                 this.SetError($"{(string)this.GetLocalResourceObject("ErrorMessagePasswordSetFailure")} {ex}");
+                this.SpecifiedPassword = null;
             }
             finally
             {
                 this.HasCredentials = false;
                 this.txAuthNPassword.Text = null;
-                this.SpecifiedPassword = null;
             }
         }
 
