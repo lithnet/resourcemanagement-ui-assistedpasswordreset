@@ -30,9 +30,10 @@ If you want to contribute a translation, see the "How can I contribute" section 
 ## How can I contribute to the project?
 * Found an issue and want us to fix it? [Log it](https://github.com/lithnet/resourcemanagement-ui-assistedpasswordreset/issues)
 * Want to fix an issue yourself or add functionality? Clone the project and submit a pull request
-* Make a [donation](https://lithnet.io/donate) and help us cover our costs 
-* Contribute a translation. Fill in the [localization survey](https://lithnet-my.sharepoint.com/personal/ryan_lithiumblue_com/_layouts/15/guestaccess.aspx?guestaccesstoken=T3kwQ4cXxG9LpoAcHWn%2fM4UpONnU%2fC73UvcSEIj7XwE%3d&docid=1_1ca961b481f6440dcb3d4154674319d44&wdFormId=%7B8C46C778%2D4238%2D43FE%2D8D3A%2DC2994C25FC21%7D) and raise a [new issue](https://github.com/lithnet/resourcemanagement-ui-assistedpasswordreset/issues/new) requesting your language be added.
+
+## Enteprise support
+Lithnet offer enterprise support plans for our open-source products. Deploy our tools with confidence that you have the backing of the dedicated Lithnet support team if you run into any issues, have questions, or need advice. Reach out to support@lithnet.io, let us know the number of users you are managing with your MIM implementation, and we'll put together a quote.
 
 ## Keep up to date
-* [Visit my blog](http://blog.lithiumblue.com)
-* [Follow me on twitter](https://twitter.com/RyanLNewington)![](http://twitter.com/favicon.ico)
+* [Visit our blog](http://blog.lithnet.io)
+* [Follow us on twitter](https://twitter.com/lithnet_io)![](http://twitter.com/favicon.ico)
